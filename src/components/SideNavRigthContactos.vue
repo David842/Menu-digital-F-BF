@@ -6,7 +6,11 @@
       :class="{ openSideNavContactos: clickMenu }"
       @click="onClickSide($event)"
     >
-      <div class="list md-scrollbar" @click="onClickSide2($event)">
+      <div
+        class="list md-scrollbar"
+        v-bind:style="styles.dataSideNavLeftUser.bgColor"
+        @click="onClickSide2($event)"
+      >
         <md-toolbar
           class="md-transparent toolbar_user tool_bar_title"
           md-elevation="0"
@@ -23,7 +27,7 @@
         <div class="md-layout md-gutter content-redes">
           <div class="md-layout-item md-size-100">
             <md-list :md-expand-single="expandSingle">
-              <a target="_blanck" href="https://www.facebook.com/ToksMx/?ref=br_rs">
+              <a target="_blanck" :href="styles.linkFacebook">
                 <md-list-item>
                   <!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                   <svg
@@ -41,7 +45,7 @@
                     <g>
                       <g>
                         <path
-                          class="primary_color_bg"
+                          v-bind:style="styles.fiillColorPrimary"
                           d="M452,0H60C26.9,0,0,26.9,0,60v392c0,33.1,26.9,60,60,60h392c33.1,0,60-26.9,60-60V60C512,26.9,485.1,0,452,0z M472,452
 			c0,11-9,20-20,20H338V309h61.8l10.2-62h-72v-43c0-17,13-30,30-30h41v-62h-41c-50.9,0-92,41.3-92,92.2V247h-60v62h60v163H60
 			c-11,0-20-9-20-20V60c0-11,9-20,20-20h392c11,0,20,9,20,20V452z"
@@ -53,7 +57,7 @@
                   <span class="md-list-item-text">Facebook</span>
                 </md-list-item>
               </a>
-              <a target="_blanck" href="https://twitter.com/toksmx?lang=es">
+              <a target="_blanck" :href="styles.linkTwitter">
                 <md-list-item :md-expand-single="expandSingle">
                   <svg
                     class="icon_side"
@@ -68,7 +72,7 @@
                     xml:space="preserve"
                   >
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M193,417.9c-35,0-76.8-8-121.4-33.3c-1.3-0.8-2.5-1.7-3.6-2.8c-4.4-4.7-8.3-12.9-6.1-21.6c1.1-4.4,4.8-12.3,16.9-16.3
 	c2-0.7,4-0.9,6.1-0.7c0.3,0,25,2,49.4-4.3c-1.4-1-2.8-2.1-4.2-3.2c-24.1-19.2-27.8-38.4-26.3-51.7c-10.4-12.1-29.3-37.9-25.7-60.9
 	c0.8-5,2.8-11.2,7.8-17c-1.6-4-3.4-9-5-14.4c-6.1-20.6-6.6-38.2-1.5-52.3c4.6-12.9,14-22.7,27-28.2c6.1-2.6,13.1-0.9,17.3,4.1
@@ -85,7 +89,7 @@
 	C426.7,158.4,426.7,158.4,426.7,158.4z"
                     />
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M497,512H15c-8.3,0-15-6.7-15-15V15C0,6.7,6.7,0,15,0h482c8.3,0,15,6.7,15,15v482C512,505.3,505.3,512,497,512z M30,482h452
 	V30H30V482z"
                     />
@@ -95,7 +99,7 @@
                 </md-list-item>
               </a>
 
-              <a target="_blanck" href="https://www.instagram.com/toksmx/?hl=es-la">
+              <a target="_blanck" :href="styles.linkInstagram">
                 <md-list-item :md-expand-single="expandSingle">
                   <svg
                     class="icon_side"
@@ -110,7 +114,7 @@
                     xml:space="preserve"
                   >
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M510.5,150.2c-1.2-27.2-5.6-45.8-11.9-62c-6.5-17.2-16.5-32.5-29.5-45.3c-12.8-13-28.3-23.1-45.2-29.4
 	c-16.3-6.3-34.8-10.7-62-11.9C334.5,0.3,325.8,0,256.4,0s-78.1,0.3-105.3,1.5c-27.2,1.2-45.8,5.6-62,11.9
 	C72,19.9,56.6,29.8,43.8,42.9c-13,12.8-23.1,28.3-29.4,45.2c-6.3,16.3-10.7,34.8-11.9,62c-1.3,27.4-1.6,36-1.6,105.4
@@ -125,12 +129,12 @@
 	z"
                     />
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M256.4,124.3c-72.5,0-131.3,58.8-131.3,131.3S184,386.8,256.4,386.8c72.5,0,131.3-58.8,131.3-131.3S328.9,124.3,256.4,124.3
 	z M256.4,340.7c-47,0-85.2-38.1-85.2-85.2s38.1-85.2,85.2-85.2c47,0,85.2,38.1,85.2,85.2S303.5,340.7,256.4,340.7z"
                     />
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M423.6,119.1c0,16.9-13.7,30.6-30.6,30.6c-16.9,0-30.6-13.7-30.6-30.6c0-16.9,13.7-30.6,30.6-30.6
 	C409.8,88.4,423.6,102.2,423.6,119.1z"
                     />
@@ -156,7 +160,7 @@
                   <g>
                     <g>
                       <path
-                        class="primary_color_bg"
+                        v-bind:style="styles.fiillColorPrimary"
                         d="M467,61H45C20.22,61,0,81.2,0,106v300c0,24.72,20.13,45,45,45h422c24.72,0,45-20.13,45-45V106C512,81.28,491.87,61,467,61
 			z M460.79,91L256.95,294.83L51.36,91H460.79z M30,399.79V112.07l144.48,143.24L30,399.79z M51.21,421l144.57-144.57l50.66,50.22
 			c5.86,5.81,15.33,5.8,21.17-0.05L317,277.21L460.79,421H51.21z M482,399.79L338.21,256L482,112.21V399.79z"
@@ -165,12 +169,19 @@
                   </g>
                 </svg>
 
-                <span class="md-list-item-text">Contáctanos via mail</span>
+                <span class="md-list-item-text">Contáctanos vía mail</span>
 
-                <md-list slot="md-expand">
-                  <a href="mailto:contacto@toks.com.mx">
-                    <md-list-item class="md-inset title-sublist list-number"
-                      >contacto@toks.com.mx</md-list-item
+                <md-list slot="md-expand" class="expand_contacts">
+                  <a
+                    :href="'mailto:' + correo"
+                    :key="i"
+                    v-for="(correo, i) in styles.correos"
+                    :index="i"
+                  >
+                    <md-list-item
+                      class="md-inset title-sublist list-number"
+                      v-bind:class="[styles.dataSideNavLeftUser.classItemSide]"
+                      >{{ correo }}</md-list-item
                     >
                   </a>
                 </md-list>
@@ -191,7 +202,7 @@
                 >
                   <g>
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M368,512c-16.5,0-32.9-2.9-48.9-8.7c-70.6-25.6-136.1-67.4-189.5-120.8S34.4,263.6,8.7,193c-8.2-22.7-10.7-46.1-7.2-69.6
 		c3.2-22,11.8-43.4,24.7-61.8c13-18.5,30.2-33.9,50-44.5C97.2,5.7,120.2,0,144.4,0c7.5,0,14.1,5.3,15.6,12.6l25.1,117.2
 		c1.1,5.3-0.5,10.8-4.3,14.7l-42.9,42.9c40.5,80.5,106.2,146.2,186.6,186.6l42.9-42.9c3.8-3.8,9.4-5.5,14.7-4.3l117.2,25.1
@@ -201,17 +212,17 @@
 		c-4.8,4.8-12,6-18.1,3.2c-95.2-44.7-172.2-121.8-217-217c-2.9-6.1-1.6-13.3,3.2-18.1l44.8-44.8L131.6,32.7z"
                     />
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M496,272c-8.8,0-16-7.2-16-16c0-123.5-100.5-224-224-224c-8.8,0-16-7.2-16-16s7.2-16,16-16c68.4,0,132.7,26.6,181,75
 		s75,112.6,75,181C512,264.8,504.8,272,496,272L496,272z"
                     />
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M432,272c-8.8,0-16-7.2-16-16c0-88.2-71.8-160-160-160c-8.8,0-16-7.2-16-16s7.2-16,16-16c105.9,0,192,86.1,192,192
 		C448,264.8,440.8,272,432,272z"
                     />
                     <path
-                      class="primary_color_bg"
+                      v-bind:style="styles.fiillColorPrimary"
                       d="M368,272c-8.8,0-16-7.2-16-16c0-52.9-43.1-96-96-96c-8.8,0-16-7.2-16-16c0-8.8,7.2-16,16-16c70.6,0,128,57.4,128,128
 		C384,264.8,376.8,272,368,272z"
                     />
@@ -221,29 +232,25 @@
                 <span class="md-list-item-text">Télefonos</span>
 
                 <md-list slot="md-expand">
-                  <a href="tel:55 2122 5727">
-                    <md-list-item class="md-inset title-sublist list-number"
-                      >
+                  <a :href="'tel:' + telefono.numero"
+                    :key="i"
+                    v-for="(telefono, i) in styles.telefonos"
+                    :index="i">
+                    <md-list-item
+                      class="md-inset title-sublist list-number"
+                      v-bind:class="[styles.dataSideNavLeftUser.classItemSide]"
+                    >
                       <div class="md-layout md-gutter">
                         <div class="md-layout-item text_desc_tel">
-                          D.F y área metropilitana
+                          {{telefono.nombre}}
                         </div>
-                        <div class="md-layout-item text_tel">55 2122 5727</div>
+                        <div class="md-layout-item text_tel text_tel_1">
+                          {{telefono.numero}}
+                        </div>
                       </div>
                     </md-list-item>
                   </a>
 
-                  <a href="tel:80 0713 9500">
-                    <md-list-item class="md-inset title-sublist list-number"
-                      >
-                      <div class="md-layout md-gutter">
-                        <div class="md-layout-item text_desc_tel">
-                          D.F y área metropilitana
-                        </div>
-                        <div class="md-layout-item text_tel">80 0713 9500</div>
-                      </div>
-                    </md-list-item>
-                  </a>
                 </md-list>
               </md-list-item>
             </md-list>
@@ -255,7 +262,11 @@
               class="md-raised md-accent btnCloseSideRight"
               @click="close"
             >
-              <md-icon class="icon_close_side">keyboard_arrow_right</md-icon>
+              <md-icon
+                class="icon_close_side"
+                v-bind:style="styles.dataSideNavLeftUser.colorBtnCloseSide"
+                >keyboard_arrow_right</md-icon
+              >
             </md-button>
           </div>
         </div>
@@ -268,7 +279,7 @@
 export default {
   name: "SideNavRigthContactos",
   props: {
-    msg: String,
+    jsonConfig: Object,
     showSideRigthContactos: Boolean,
   },
   created() {
@@ -297,6 +308,7 @@ export default {
       clickMenu: this.showSideRigthContactos,
       clickChildSide: false,
       nameUser: null,
+      styles: this.jsonConfig,
     };
   },
   methods: {
@@ -361,27 +373,62 @@ export default {
   min-height: 40px !important;
 }
 
-
-.list-number.md-inset .md-list-item-content{
+.list-number.md-inset .md-list-item-content {
   padding-left: 30px !important;
-  background: transparent linear-gradient(180deg, #2F2F30 0%, #262628 100%) 0% 0% no-repeat padding-box;
-box-shadow: 0px 3px 6px #00000042;
-border-radius: 2px;
-opacity: 1;
+  /*background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+    0% no-repeat padding-box;*/
+  box-shadow: 0px 3px 6px #00000042;
+  border-radius: 2px;
+  opacity: 1;
 }
 
-.text_desc_tel{
+.list-number-toks.md-inset .md-list-item-content {
+  padding-left: 30px !important;
+  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+    0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000042;
+  border-radius: 2px;
+  opacity: 1;
+}
+
+.list-number-bf.md-inset .md-list-item-content {
+  padding-left: 30px !important;
+  background: transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0%
+    0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000042;
+  border-radius: 2px;
+  opacity: 1;
+}
+
+.list-number-elfarolito.md-inset .md-list-item-content {
+  padding-left: 30px !important;
+  background: transparent linear-gradient(180deg, #cf1a33 0%, #ad182d 100%) 0%
+    0% no-repeat padding-box !important;
+  box-shadow: 0px 3px 6px #00000042;
+  border-radius: 2px;
+  opacity: 1;
+}
+
+.text_desc_tel {
   font-size: 10px;
 }
 
-.text_tel{
+.text_tel {
   font-size: 13px;
 }
 
+.text_tel_1 {
+  padding-left: 10px !important;
+      text-align: end;
+}
+
+.text_tel_2 {
+  padding-left: 0px !important;
+}
 </style>
 
 <style lang="scss" scoped>
-$list-width: 320px;
+$list-width: 280px;
 
 .full-control {
   display: flex;
@@ -458,7 +505,7 @@ $list-width: 320px;
 
 .btnCloseSideRight {
   position: absolute !important;
-  top: 58%;
+  top: 60%;
   left: 0;
   width: 30px !important;
   min-width: 0;
@@ -499,6 +546,7 @@ $list-width: 320px;
 
 .icon_close_side {
   color: #f58220 !important;
+  font-size: 40px !important;
 }
 
 .content-redes {
@@ -506,7 +554,14 @@ $list-width: 320px;
 }
 
 .md-icon {
-  font-size: 48px !important;
+}
+
+.openSideNavContactos > div > div > div > ul {
+  background-color: inherit !important;
+}
+
+.md-list {
+  background-color: initial !important;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -573,7 +628,7 @@ $list-width: 320px;
     margin-left: 100%;
     z-index: 26;
     /*width: 100%;*/
-    background-color: #00000000;
+    background-color: #be6a6a00;
     transition: all 1s;
   }
 
@@ -692,7 +747,7 @@ $list-width: 320px;
     margin-left: 100%;
     z-index: 26;
     /*width: 100%;*/
-    background-color: #00000000;
+    background-color: #a55a5a00;
     transition: all 1s;
   }
 

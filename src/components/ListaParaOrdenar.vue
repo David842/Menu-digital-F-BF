@@ -1,18 +1,17 @@
 <template>
-  <div class="configuracion">
-    <p class="nombre_seccion nombre_seccion_lista">
+  <div class="configuracion" v-bind:style="styles.dataSideNavLeftUser.bgColor">
+    <p class="nombre_seccion nombre_seccion_lista" v-bind:style="jsonConfig.dataCategorias.styleNombreView">
       LISTA PARA ORDENAR
     </p>
     <div>
       <md-button class="md-fab md-mini btnMenuReturn" @click="closeLista">
-        <md-icon class="icon_btn_menu">keyboard_arrow_left</md-icon>
+        <md-icon class="icon_btn_menu" v-bind:style="jsonConfig.dataCategorias.iconBtnTopLeft">keyboard_arrow_left</md-icon>
       </md-button>
 
-      <md-button class="md-fab md-mini btnMenuRight">
+      <!--<md-button class="md-fab md-mini btnMenuRight">
         <md-icon class="icon_btn_menu">menu</md-icon>
-      </md-button>
+      </md-button>-->
     </div>
-
     <div class="md-layout md-gutter content_info_lista">
       <div class="md-layout-item md-layout md-gutter">
         <div
@@ -40,25 +39,25 @@
             <md-card class="card_producto card_producto_list">
               <md-card-media>
                 <img
-                  v-bind:src="producto.ubicacion_articulo"
+                  v-bind:src="(typeof(producto.ubicacion_articulo) === 'undefined' || producto.ubicacion_articulo == null) ? 'https://pruebasgerard.com/toks/recs/image-not-found.png' : producto.ubicacion_articulo " 
                   alt="Producto"
                   class="img_producto_lista"
                 />
-                <p class="delete_prod" @click="deleteProd(i)">x</p>
+                <p class="delete_prod" @click="deleteProd(i)" v-bind:style="styles.bgDegradedColorPrimary">x</p>
               </md-card-media>
             </md-card>
             <div class="info_prod_list">
               <p class="title_producto_lista">{{ producto.platillo }}</p>
-              <p class="title_price_list">${{ parseFloat(producto.precio) }}</p>
+              <p class="title_price_list" v-bind:style="styles.styleBtnHome">${{ parseFloat(producto.precio) }}</p>
             </div>
           </div>
           <div
             class="md-layout-item md-medium-size-20 md-small-size-30 md-xsmall-size-30 item-controls"
           >
-            <div class="content_controls">
+            <div class="content_controls " >
               <md-button
                 class="md-icon-button controlProd"
-                @click="decrement(producto)"
+                @click="decrement(producto)" v-bind:style="styles.dataCategorias.style_border_primaryColor"
               >
                 -
               </md-button>
@@ -68,6 +67,7 @@
               <md-button
                 class="md-icon-button md-primary controlProd"
                 @click="increment(producto)"
+                v-bind:style="styles.dataCategorias.style_border_primaryColor"
               >
                 +
               </md-button>
@@ -77,93 +77,16 @@
       </div>
     </div>
 
-    <div class="conten_precio">
+    <div class="conten_precio" >
       <p class="title_total_list">TOTAL</p>
-      <p class="total_list">${{ parseFloat(total) }}</p>
+      <p class="total_list" v-bind:style="styles.dataCategorias.style_border_primaryColor">${{ parseFloat(total) }}</p>
     </div>
 
-    <!--<div class="menu_home_bottom">
-      <md-button class="md-fab md-mini btnFav" @click="goToHome">
-        <svg
-          version="1.2"
-          baseProfile="tiny"
-          id="Capa_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="0 0 512 512"
-          xml:space="preserve"
-          class="icon_home"
-        >
-          <g>
-            <g>
-              <path
-                class="white"
-                d="M503.4,228.9l-43.3-39.4V58.8c0-8.3-6.7-15.1-15.1-15.1H341c-8.3,0-15.1,6.7-15.1,15.1v8.4l-52.2-47.6
-			c-10.1-9.2-25.3-9.2-35.4,0L8.6,228.9c-8.1,7.4-10.7,18.7-6.8,28.9c3.9,10.2,13.6,16.8,24.5,16.8H63v209.7
-			c0,8.3,6.7,15.1,15.1,15.1h125.9c8.3,0,15.1-6.7,15.1-15.1V356.9h74v127.3c0,8.3,6.7,15.1,15.1,15.1H434c8.3,0,15.1-6.7,15.1-15.1
-			V274.5h36.7c10.9,0,20.5-6.6,24.5-16.8C514.1,247.6,511.5,236.2,503.4,228.9z M434,244.4c-8.3,0-15.1,6.7-15.1,15.1v209.7h-95.8
-			V341.9c0-8.3-6.7-15.1-15.1-15.1H203.9c-8.3,0-15.1,6.7-15.1,15.1v127.3H93.1V259.5c0-8.3-6.7-15.1-15.1-15.1H36.2L256,44.2
-			l74.8,68.2c4.4,4,10.8,5.1,16.2,2.6c5.5-2.4,9-7.8,9-13.8V73.8h74v122.3c0,4.2,1.8,8.3,4.9,11.1l40.8,37.2L434,244.4L434,244.4z"
-              />
-            </g>
-          </g>
-        </svg>
-      </md-button>
-      <md-button class="md-fab md-mini md-plain btnList">
-        <svg
-          class="icon_home"
-          id="Capa_1"
-          data-name="Capa 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 494.64 489.93"
-        >
-          <title>
-            Lista
-          </title>
-          <path
-            class="white"
-            d="M492,79.22a19.11,19.11,0,0,0-12.64-9L199.17,2.71a19,19,0,0,0-21.54,12.14L70.83,286.16l35.66,13,101.21-258L451.14,103.3c-15.2,47.13-51.38,145.51-86.06,237.11-30.24,79.92-47.63,107.29-80.7,112.88a.2.2,0,0,1-.08-.14c-67.59,9.48-66.37-76.68-66.37-76.68L2.08,289.28c-15.34,97.22,59.36,120.6,59.36,120.6l158,71.75S244.18,493.4,271,492.2c72.32-1.71,97.74-54.22,129.58-138.36,46-121.59,92.71-257.83,93.17-259.28A18.81,18.81,0,0,0,492,79.22Z"
-            transform="translate(0 -2.36)"
-          />
-          <path
-            class="white"
-            d="M364.27,188.63a18.9,18.9,0,0,0,23.31-13.28A19,19,0,0,0,374.26,152L292,126.65a19,19,0,1,0-10,36.61Z"
-            transform="translate(0 -2.36)"
-          />
-          <path
-            class="white"
-            d="M235.78,215.94a19,19,0,0,0,12,24l81.81,29.24a18.73,18.73,0,0,0,5.9,1,19,19,0,0,0,6.11-37L259.82,204A19,19,0,0,0,235.78,215.94Z"
-            transform="translate(0 -2.36)"
-          />
-          <path
-            class="white"
-            d="M228.59,283.18a19,19,0,1,0-11.82,36l82,29.11a18.28,18.28,0,0,0,5.94,1,19,19,0,0,0,5.89-37Z"
-            transform="translate(0 -2.36)"
-          />
-          <path
-            class="white"
-            d="M225.55,104.52c11.62,0,21,9.16,21,20.46s-9.43,20.45-21,20.45S204.5,136.28,204.5,125,213.93,104.52,225.55,104.52Z"
-            transform="translate(0 -2.36)"
-          />
-          <path
-            class="white"
-            d="M195.78,180.57c11.63,0,21.05,9.16,21.05,20.45s-9.42,20.44-21.05,20.44S174.73,212.3,174.73,201,184.16,180.57,195.78,180.57Z"
-            transform="translate(0 -2.36)"
-          />
-          <path
-            class="white"
-            d="M164,259c11.63,0,21.06,9.17,21.06,20.48S175.66,300,164,300,143,290.81,143,279.52,152.41,259,164,259Z"
-            transform="translate(0 -2.36)"
-          />
-        </svg>
-      </md-button>
-    </div>-->
 
     <md-dialog
       :md-active.sync="showDialogYaOrdene"
       class="dialog_producto_yaordene"
+      v-bind:class="styles.dataHome.classDialogCustom"
     >
       <div class="content_detalle content_dialog_yaordene">
         <p class="desc_gracias">
@@ -171,14 +94,15 @@
         </p>
         <md-button
           class="md-raised md-accent btn_add_orden"
-          @click="showDialogYaOrdene = false"
+          @click="showYaOrdene"
+          v-bind:style="styles.bgDegradedColorPrimary"
         >
           OK
         </md-button>
       </div>
     </md-dialog>
 
-    <md-button class="md-raised md-accent btnYaOrdene" @click="yaOrdene">
+    <md-button class="md-raised md-accent btnYaOrdene" @click="yaOrdene" v-bind:style="styles.bgDegradedColorPrimary">
       Ya ordené
     </md-button>
   </div>
@@ -190,6 +114,7 @@ export default {
   props: {
     showConfiguracion: Boolean,
     listaParaOrdenar: Array,
+    jsonConfig: Object,
   },
   data() {
     return {
@@ -210,6 +135,7 @@ export default {
       },
       listaDeOrden: this.listaParaOrdenar,
       total: 0,
+      styles: this.jsonConfig,
     };
   },
   methods: {
@@ -237,6 +163,10 @@ export default {
       console.log(articulo);
       this.articuloSelected = articulo;
       this.showDialogYaOrdene = true;
+    },
+    showYaOrdene(){
+      this.showDialogYaOrdene = false;
+      this.$router.go(-1);
     },
     goToHome() {
       this.$router.push("/Home/1");
@@ -290,7 +220,8 @@ export default {
         break;
       }
     }
-    console.log(lista + " ---");
+    
+    
     if (lista != null && lista != "") {
       var arr = JSON.parse(lista);
       this.listaDeOrden = arr;
@@ -348,21 +279,12 @@ export default {
   background-color: #353535;
 }
 
-.banner_categoria {
-  background-size: cover;
-  background-position: center;
-  display: block;
-  position: fixed;
-  top: 80px;
-  width: 100%;
-  height: calc(33%);
-}
 
 .btnMenuRight {
   background-color: rgb(31, 31, 31) !important;
   position: fixed;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 3px;
   background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
     0% no-repeat padding-box;
   border-radius: 25px;
@@ -389,7 +311,7 @@ export default {
   width: 290px !important;
   margin-left: -145px;
   color: #fff;
-  font-family: AvenirNextLTPro-Regular !important;
+  font-family: FontMain !important;
   font-weight: 200;
   font-size: 23px !important;
   text-transform: uppercase;
@@ -530,12 +452,14 @@ export default {
   box-shadow: initial;
 }
 
-.dialog_producto_yaordene {
+.dialog_producto_yaordene > div{
   z-index: 30;
+  border-radius: 15px !important;
+  background: inherit !important;
 }
 
 .dialog_producto_yaordene > div {
-  background-color: inherit !important;
+  /*background-color: inherit !important;*/
   width: 80% !important;
 }
 
@@ -559,8 +483,8 @@ export default {
 }
 
 .img_producto_lista {
-  height: 150px !important;
-  width: 150px !important;
+  height: 145px !important;
+  width: 145px !important;
   border-radius: 20px;
   object-fit: cover;
   object-position: center;
@@ -576,8 +500,8 @@ export default {
   border-radius: 100%;
   position: absolute;
   display: inline-table;
-  top: -14px;
-  right: 7px;
+  top: -12px;
+  right: 3px;
 }
 
 .title_producto_lista {
@@ -604,7 +528,7 @@ export default {
 .controlProd {
   color: #fff !important;
   font-size: 20px;
-  border: 1px solid #f58220;
+  /*border: 1px solid #f58220;*/
   border-radius: 5px;
   height: 30px !important;
   min-width: 30px !important;
@@ -649,7 +573,8 @@ export default {
 
 .total_list {
   color: #eee;
-  border: 1px solid #f58220;
+  /*border: 1px solid #f58220;*/
+  border-radius: 5px;
   padding-top: 5px;
   padding-bottom: 1px;
   padding-left: 40px;
@@ -685,16 +610,19 @@ export default {
 }
 
 .content_list_products {
-  height: 56vh !important;
+  height: 48vh !important;
   overflow: auto;
 }
 
 .content_dialog_yaordene {
+  
   border: none !important;
+  background: inherit;
 }
 
 .dialog_producto_yaordene > div {
   width: 70% !important;
+  height: auto !important;
 }
 
 .desc_gracias {
@@ -712,7 +640,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/desayunos.jpg);
     background-size: cover;
     background-position: center;
   }
@@ -721,13 +648,13 @@ export default {
     font-size: 20px !important;
     top: 5px;
     left: 50%;
-    width: 180px;
-    margin-left: -145px;
-    font-size: 14px;
+    width: 200px !important;
+    margin-left: -25% !important;
+    font-size: 14px !important;
   }
 
   .btnMenuRight {
-    top: 15px;
+    top: 12px;
     right: 0;
   }
 
@@ -737,6 +664,21 @@ export default {
 
   .menu_home_bottom > button {
     margin: 0;
+  }
+
+  .img_producto_lista {
+        height: 130px !important;
+    width: 130px !important;
+  }
+  
+  .content_list_products{
+    height: 42vh !important;
+  }
+}
+
+@media (min-width: 370px) and (max-width: 400px) {
+  .content_list_products{
+    height: 45vh !important;
   }
 }
 
@@ -758,7 +700,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/desayunos.jpg);
     background-size: cover;
     background-position: center;
   }
@@ -784,5 +725,30 @@ export default {
   .info_prod_list {
     padding-left: 170px;
   }
+}
+
+
+/**/
+.dialog_customToks > div {
+  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.dialog_customBF > div {
+  background: transparent
+    linear-gradient(
+      180deg,
+      var(--unnamed-color-00000000) 0%,
+      var(--unnamed-color-191919) 100%
+    )
+    0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px var(--unnamed-color-00000000);
+  background: transparent linear-gradient(180deg, #000000 0%, #191919 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.dialog_customElFarolito > div {
+  background: transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0%
+    0% no-repeat padding-box;
 }
 </style>

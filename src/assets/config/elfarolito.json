@@ -1,0 +1,173 @@
+{
+  "baseURL": "https://www.menugrg.com.mx:7443/",
+  "bgDegradedColorPrimary": [
+    {
+      "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box !important"
+    }
+  ],
+  "bgDegradedSecondColor": [
+    {
+      "background": "transparent linear-gradient(180deg, #55565A 0%, #47484A 100%) 0% 0% no-repeat padding-box !important"
+    }
+  ],
+  "dataSideNavLeftUser": {
+    "bgColor": [
+      {
+        "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "colorBtnCloseSide": [
+      {
+        "color": "#fff !important"
+      }
+    ],
+    "classItemSide": "list-number-elfarolito"
+  },
+  "fiillColorPrimary": [
+    {
+      "fill": "#FFF !important"
+    }
+  ],
+  "colorPrimary": [
+    {
+      "color": "#ebb373 !important"
+    }
+  ],
+  "styleBtnHome": [
+    {
+      "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box !important",
+      "font-weight": "bold",
+      "color": "#FFF"
+    }
+  ],
+  "dataHome": {
+    "bgHome": [
+      {
+        "width": "100%",
+        "height": "100%",
+        "display": "block",
+        "z-index": "5",
+        "position": "fixed",
+        "top": "0",
+        "background-image": "linear-gradient(rgba(207, 26, 51, 0.95), 0%, rgb(173,24,45,0.97) 100%),url('https://www.menugrg.com.mx:7443/recs_marcas/Textura_farolito_min.png')"
+      }
+    ],
+    "fondo_home": [
+      {
+        "background": "url('https://pruebasgerard.com/toks/recs/PORTADA_1_2560x1600.jpg')",
+        "background-size": "cover !important"
+      }
+    ],
+    "titleCarrouselExp": "Tortillas hechas a mano",
+    "src_logo_home": "https://pruebasgerard.com/toks/recs/Logotipo_elfarolito.png",
+    "src_sello": null,
+    "class_logo_home": "photoElFarolito",
+    "class_sello_home": "selloBF",
+    "styleLogo_home": [{}],
+    "styleTitleExperiencias": [
+      {
+        "font-family": "GilliganShutter",
+        "font-size": "25px",
+        "bottom": "155px"
+      }
+    ],
+    "title_eslogan": null,
+    "btnConfirmar": [
+      {
+        "background": "transparent linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box !important",
+        "color": "#47484A !important"
+      }
+    ],
+    "btnCancel": [
+      {
+        "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box !important",
+        "color": "#FFF !important"
+      }
+    ],
+    "btnLocal": [
+      {
+        "background": "transparent linear-gradient(180deg, #55565A 0%, #47484A 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "btnUbicacion": [
+      {
+        "background": "transparent linear-gradient(180deg, var(--unnamed-color-191919) 0%, var(--unnamed-color-00000000) 100%) 0% 0% no-repeat padding-box !important",
+        "box-shadow": "rgb(248, 248, 248) 0px 1px 0px",
+        "border-radius": "24px",
+        "opacity": 1
+      }
+    ],
+    "colorIcon": [
+      {
+        "color": "#fff !important"
+      }
+    ],
+
+    "classDialogCustom": "dialog_customElFarolito"
+  },
+  "dataCategorias": {
+    "styleNombreView": [
+      {
+        "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box",
+        "box-shadow": " 0px 1px 0px #FFF"
+      }
+    ],
+    "iconBtnTopLeft": [
+      {
+        "color": "#fff !important"
+      }
+    ],
+    "btnTopLeft": [
+      {
+        "background": "transparent linear-gradient(180deg, #55565A 0%, #47484A 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "iconControls": [{}],
+    "styles_content_experiencias": [
+      {
+        "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box !important",
+        "box-shadow": "rgb(248, 248, 248) 0px 1px 0px"
+      }
+    ],
+    "style_menu_home_bottom": [
+      {
+        "background": "transparent linear-gradient(180deg, #55565A 0%, #47484A 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "colorBtnCloseSide": [
+      {
+        "color": "#FFF !important"
+      }
+    ],
+    "style_border_primaryColor": [
+      {
+        "border": "1px solid #FFF  "
+      }
+    ],
+    "classControls_categorias": "carrousel-3d-categoriasElFarolito"
+  },
+  "dataDetalles": {
+    "colorTitleProd": [
+      {
+        "color": "#FFF !important"
+      }
+    ],
+    "style_select_medida": {
+      "border": "1px solid #f58220"
+    },
+    "style_content_add_prod": [
+      {
+        "background": "transparent linear-gradient(180deg, #CF1A33 0%, #AD182D 100%) 0% 0% no-repeat padding-box",
+        "box-shadow": "0px 3px 6px #00000042"
+      }
+    ]
+  },
+  "linkFacebook": "https://www.facebook.com/tacoselfarolito/",
+  "linkTwitter": "https://twitter.com/farolitooficial?lang=es",
+  "linkInstagram": "https://www.instagram.com/tacoselfarolito_mx/",
+  "correos": ["clientesfarolito@elfarolito.com.mx"],
+  "telefonos": [
+    { "nombre": "Atn a clientes", "numero": "80 0713 9500" },
+    { "nombre": "Catering", "numero": "21 225 702" }
+  ]
+}

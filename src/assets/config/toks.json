@@ -1,0 +1,146 @@
+{
+  "baseURL": "https://www.menugrg.com.mx:7443/",
+  "bgDegradedColorPrimary": [
+    {
+      "background": "transparent linear-gradient(180deg, #f58220 0%, #db6500 100%) 0% 0% no-repeat padding-box !important"
+    }
+  ],
+  "bgDegradedSecondColor": [
+    {
+      "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box !important"
+    }
+  ],
+  "fiillColorPrimary": [
+    {
+      "fill": "#f58220 !important"
+    }
+  ],
+  "colorPrimary": [
+    {
+      "color": "#f58220  !important"
+    }
+  ],
+  "styleBtnHome": [
+    {
+      "background": "transparent linear-gradient(180deg, #f58220 0%, #db6500 100%) 0% 0% no-repeat padding-box !important",
+      "color": "#1b1818 !important",
+      "font-weight": "bold",
+      "color": "#FFF"
+    }
+  ],
+  "dataHome": {
+    "fondo_home": [
+      {
+        "background": "url('https://pruebasgerard.com/toks/recs/fondo_home.jpg')"
+      }
+    ],
+    "titleCarrouselExp": "Esta es la experiencia Toks",
+    "subtitleCarrouselExp": null,
+    "src_logo_home": "https://pruebasgerard.com/toks/recs/logo_toks.png",
+    "src_sello": null,
+    "class_logo_home": "photoToks",
+    "styleLogo_home": [{}],
+    "styleTitleExperiencias": [{}],
+    "style_fondo_home": [
+      {
+        "background-image": "url('~@/assets/img/fondo_home.jpg)"
+      }
+    ],
+    "title_eslogan": "Estar aquí, está mejor.",
+    "btnConfirmar": [
+      {
+        "background": "transparent linear-gradient(180deg, #f58220 0%, #db6500 100%) 0% 0% no-repeat padding-box !important",
+        "color": "#FFF !important"
+      }
+    ],
+    "btnCancel": [
+      {
+        "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box !important",
+        "color": "#FFF !important"
+      }
+    ],
+    "btnLocal": [
+      {
+        "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "colorIcon": [
+      {
+        "color": "#f58220 !important"
+      }
+    ],
+    "classDialogCustom": "dialog_customToks"
+  },
+  "dataDetalles": {
+    "colorTitleProd": [
+      {
+        "color": "#f58220 !important"
+      }
+    ],
+    "style_select_medida": {
+      "border": "1px solid #f58220"
+    }
+  },
+  "dataSideNavLeftUser": {
+    "bgColor": [
+      {
+        "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "colorBtnCloseSide": [
+      {
+        "color": "#f58220 !important"
+      }
+    ],
+    "classItemSide": "list-number-toks"
+  },
+  "dataCategorias": {
+    "styleNombreView": [
+      {
+        "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box"
+      }
+    ],
+    "bgHome": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important",
+        "width": "100%",
+        "height": "100%",
+        "display": "block",
+        "z-index": "5",
+        "position": "fixed",
+        "top": "0"
+      }
+    ],
+    "btnTopLeft": [
+      {
+        "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "style_menu_home_bottom": [
+      {
+        "background": "transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "iconBtnTopLeft": [
+      {
+        "color": "#f58220 !important"
+      }
+    ],
+    "style_border_primaryColor": [
+      {
+        "border": "1px solid #f58220  "
+      }
+    ],
+    "iconControls": [{}],
+
+    "classControls_categorias": "carrousel-3d-categoriasToks"
+  },
+  "linkFacebook": "https://www.facebook.com/ToksMx/?ref=br_rs",
+    "linkTwitter": "https://twitter.com/toksmx?lang=es",
+    "linkInstagram": "https://www.instagram.com/toksmx/?hl=es-la/",
+    "correos": ["contacto@toks.com.mx"],
+    "telefonos": [
+      { "nombre": "CDMX y área metropolitana", "numero": "55 2122 5727" },
+      { "nombre": "Interior de la república", "numero": "80 0713 9500" }
+    ]
+}

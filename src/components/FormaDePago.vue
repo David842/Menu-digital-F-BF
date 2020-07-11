@@ -1,6 +1,6 @@
 <template>
-  <div class="configuracion fromas_de_pago">
-    <p class="nombre_seccion">
+  <div class="configuracion fromas_de_pago" v-bind:style="styles.dataSideNavLeftUser.bgColor">
+    <p class="nombre_seccion" v-bind:style="styles.dataCategorias.styleNombreView">
       FORMAS DE PAGO
     </p>
     <!--<button @click="goToSlide(5)">Go to Slide Index 5</button>-->
@@ -10,16 +10,16 @@
         class="md-fab md-mini btnMenuReturn"
         @click="closeView"
       >
-        <md-icon class="icon_btn_menu">keyboard_arrow_left</md-icon>
+        <md-icon class="icon_btn_menu" v-bind:style="styles.dataCategorias.iconBtnTopLeft">keyboard_arrow_left</md-icon>
       </md-button>
     </div>
 
-    <md-divider class="divider_custom"></md-divider>
+    <md-divider class="divider_custom" v-bind:style="styles.bgDegradedColorPrimary"></md-divider>
 
     <div class="md-layout md-gutter">
       <div class="md-layout-item md-layout md-gutter content_forma">
         <div
-          class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-25"
+          class="md-layout-item md-medium-size-20 md-small-size-30 md-xsmall-size-25"
         >
           <svg
             class="ic_forma"
@@ -36,7 +36,7 @@
             <g>
               <g>
                 <path
-                  class="primary_color_bg"
+                  v-bind:style="styles.fiillColorPrimary"
                   d="M267.3,241.2h-22.5c-4.3,0-7.7-3.5-7.7-7.7v-11.3c0-4.3,3.5-7.7,7.7-7.7h22.5c4.3,0,7.7,3.5,7.7,7.7
 			c0,8.2,6.6,14.8,14.8,14.8s14.8-6.6,14.8-14.8c0-19.4-14.8-35.3-33.8-37.1v-7.9c0-8.2-6.6-14.8-14.8-14.8s-14.8,6.6-14.8,14.8v7.9
 			c-18.9,1.8-33.8,17.7-33.8,37.1v11.3c0,20.6,16.7,37.3,37.3,37.3h22.5c4.3,0,7.7,3.5,7.7,7.7v11.3c0,4.3-3.5,7.7-7.7,7.7h-22.5
@@ -48,7 +48,7 @@
             <g>
               <g>
                 <path
-                  class="primary_color_bg"
+                  v-bind:style="styles.fiillColorPrimary"
                   d="M497.2,83.7H14.8C6.6,83.7,0,90.3,0,98.5v315.1c0,8.2,6.6,14.8,14.8,14.8h482.5c8.2,0,14.8-6.6,14.8-14.8V98.5
 			C512,90.3,505.4,83.7,497.2,83.7z M482.5,398.8H29.5V113.2h452.9L482.5,398.8L482.5,398.8z"
                 />
@@ -57,7 +57,7 @@
             <g>
               <g>
                 <path
-                  class="primary_color_bg"
+                  v-bind:style="styles.fiillColorPrimary"
                   d="M118.2,142.8H73.8c-8.2,0-14.8,6.6-14.8,14.8v39.4c0,8.2,6.6,14.8,14.8,14.8s14.8-6.6,14.8-14.8v-24.6h29.5
 			c8.2,0,14.8-6.6,14.8-14.8S126.3,142.8,118.2,142.8z"
                 />
@@ -66,7 +66,7 @@
             <g>
               <g>
                 <path
-                  class="primary_color_bg"
+                  v-bind:style="styles.fiillColorPrimary"
                   d="M438.2,142.8h-44.3c-8.2,0-14.8,6.6-14.8,14.8s6.6,14.8,14.8,14.8h29.5v24.6c0,8.2,6.6,14.8,14.8,14.8s14.8-6.6,14.8-14.8
 			v-39.4C452.9,149.4,446.3,142.8,438.2,142.8z"
                 />
@@ -75,7 +75,7 @@
             <g>
               <g>
                 <path
-                  class="primary_color_bg"
+                  v-bind:style="styles.fiillColorPrimary"
                   d="M118.2,339.7H88.6v-24.6c0-8.2-6.6-14.8-14.8-14.8s-14.8,6.6-14.8,14.8v39.4c0,8.2,6.6,14.8,14.8,14.8h44.3
 			c8.2,0,14.8-6.6,14.8-14.8S126.3,339.7,118.2,339.7z"
                 />
@@ -84,7 +84,7 @@
             <g>
               <g>
                 <path
-                  class="primary_color_bg"
+                 v-bind:style="styles.fiillColorPrimary"
                   d="M438.2,300.3c-8.2,0-14.8,6.6-14.8,14.8v24.6h-29.5c-8.2,0-14.8,6.6-14.8,14.8s6.6,14.8,14.8,14.8h44.3
 			c8.2,0,14.8-6.6,14.8-14.8v-39.4C452.9,306.9,446.3,300.3,438.2,300.3z"
                 />
@@ -106,7 +106,7 @@
     <div class="md-layout md-gutter content_forma">
       <div class="md-layout-item md-layout md-gutter">
         <div
-          class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-25"
+          class="md-layout-item md-medium-size-20 md-small-size-30 md-xsmall-size-25"
         >
           <svg
             class="ic_forma"
@@ -122,7 +122,7 @@
           >
             <g>
               <path
-                class="primary_color_bg"
+                v-bind:style="styles.fiillColorPrimary"
                 d="M12.2,3.6C11,3.6,9.8,4,9,4.7C8,3.8,6.7,3.3,5.3,3.3C2.4,3.3,0,5.7,0,8.6S2.4,14,5.3,14
 		C6.7,14,8,13.4,9,12.5c0.9,0.7,2,1.2,3.2,1.2c2.8,0,5.1-2.3,5.1-5.1S15,3.6,12.2,3.6z M12.2,12.4c-0.9,0-1.7-0.3-2.4-0.9
 		c0.5-0.8,0.9-1.8,0.9-2.9s-0.3-2.1-0.9-2.9c0.6-0.5,1.5-0.9,2.4-0.9c2.1,0,3.7,1.7,3.7,3.7S14.2,12.4,12.2,12.4z"
@@ -146,14 +146,14 @@
     <div class="md-layout md-gutter content_forma">
       <div class="md-layout-item md-layout md-gutter">
         <div
-          class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-25"
+          class="md-layout-item md-medium-size-20 md-small-size-30 md-xsmall-size-25"
         >
           <svg class="ic_forma" version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	 x="0px" y="0px" viewBox="0 0 469.3 469.3" xml:space="preserve">
 <g>
 	<g>
 		<g>
-			<path class="primary_color_bg"  d="M448,236.6v-66c0-22.4-17.4-40.6-39.3-42.3l-61.3-107c-5.7-9.9-14.8-17-25.8-19.9c-10.9-2.9-22.3-1.4-32.1,4.3L79.6,128
+			<path v-bind:style="styles.fiillColorPrimary"  d="M448,236.6v-66c0-22.4-17.4-40.6-39.3-42.3l-61.3-107c-5.7-9.9-14.8-17-25.8-19.9c-10.9-2.9-22.3-1.4-32.1,4.3L79.6,128
 				H42.7C19.1,128,0,147.1,0,170.7v256c0,23.5,19.1,42.7,42.7,42.7h362.7c23.5,0,42.7-19.1,42.7-42.7v-66
 				c12.4-4.4,21.3-16.1,21.3-30v-64C469.3,252.8,460.4,241.1,448,236.6z M383.9,128h-93l69.7-40.6L383.9,128z M350.1,68.9L248.6,128
 				h-42.1l133.1-77.5L350.1,68.9z M300.3,24.2c4.8-2.8,10.5-3.6,15.8-2.1c5.4,1.5,10,5,12.8,9.9l0,0l-164.9,96H122L300.3,24.2z
@@ -161,7 +161,7 @@
 				c11.8,0,21.3,9.6,21.3,21.3v64h-64c-35.3,0-64,28.7-64,64s28.7,64,64,64h64L426.7,426.7L426.7,426.7z M448,330.7
 				c0,5.9-4.8,10.7-10.7,10.7h-74.7c-23.5,0-42.7-19.1-42.7-42.7c0-23.5,19.1-42.7,42.7-42.7h74.7c5.9,0,10.7,4.8,10.7,10.7V330.7z"
 				/>
-			<path d="M362.7,277.3c-11.8,0-21.3,9.6-21.3,21.3s9.6,21.3,21.3,21.3s21.3-9.6,21.3-21.3C384,286.9,374.4,277.3,362.7,277.3z"/>
+			<path v-bind:style="styles.fiillColorPrimary" d="M362.7,277.3c-11.8,0-21.3,9.6-21.3,21.3s9.6,21.3,21.3,21.3s21.3-9.6,21.3-21.3C384,286.9,374.4,277.3,362.7,277.3z"/>
 		</g>
 	</g>
 </g>
@@ -187,7 +187,7 @@
           class="md-layout-item md-medium-size-100 md-small-size-100 md-xsmall-size-100"
         >
           <h2 class="desc_info">
-            Nuestros precios están en M.N. e incluyen I.V.A
+            Nuestros precios están en M.N. e incluyen I.V.A.
           </h2>
         </div>
       </div>
@@ -216,8 +216,12 @@ import { Carousel3d, Slide, Controls } from "vue-carousel-3d";
 
 export default {
   name: "FormaPagos",
+  props:{
+    jsonConfig: Object
+  },
   data() {
     return {
+      styles: this.jsonConfig,
       categorias: [],
       showSideRight: false,
       experiencias: [],
@@ -225,7 +229,7 @@ export default {
       heightItem: 300,
       widthItemExp: 320,
       nombre_seccion: "Seccion",
-      img_categoria: "../assets/img/Chilaquiles-mayas.jpg",
+      img_categoria: "",
       articuloSelected: {
         platillo: "Producto",
         descripcion_articulo: "Descripcion",
@@ -278,7 +282,7 @@ export default {
   display: block;
   position: fixed;
   z-index: 30;
-  top: 0;
+  top: 0px;
   border: none;
   background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
     0% no-repeat padding-box;
@@ -313,20 +317,11 @@ export default {
   background-color: #353535;
 }
 
-.banner_categoria {
-  background-size: cover;
-  background-position: center;
-  display: block;
-  position: fixed;
-  top: 80px;
-  width: 100%;
-  height: calc(33%);
-}
 
 .btnMenuRight {
   background-color: rgb(31, 31, 31) !important;
   position: fixed;
-  top: 5px;
+  top: 12px;
   right: 5px;
   background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
     0% no-repeat padding-box;
@@ -354,7 +349,7 @@ export default {
   width: 260px !important;
   margin-left: -125px;
   color: #fff;
-  font-family: AvenirNextLTPro-Regular !important;
+  font-family: FontMain !important;
   font-weight: 200;
   font-size: 23px !important;
   text-transform: uppercase;
@@ -371,14 +366,6 @@ export default {
     0% no-repeat padding-box;
   border-radius: 25px;
   opacity: 1;
-}
-
-.productos {
-  position: fixed;
-  top: calc(34% + 80px);
-  width: 100%;
-  height: calc(100% - 46%);
-  overflow-y: auto;
 }
 
 .title_subcategoria {
@@ -455,8 +442,15 @@ export default {
     width: 90% ;
 }
 
+.divider_custom {
+  height: 2.5px;
+  margin-top: 75px !important;
+}
+
 @media (min-width: 320px) and (max-width: 400px) {
-  
+  .content_aviso{
+    margin-top: 10% !important;
+  }
 }
 
 @media (min-width: 400px) and (max-width: 480px) {

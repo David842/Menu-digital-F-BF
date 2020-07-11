@@ -1,0 +1,6 @@
+v-bind:src="
+                  typeof articulo.ubicacion_articulo_min === 'undefined' ||
+                  articulo.ubicacion_articulo_min == null
+                    ? 'https://pruebasgerard.com/toks/recs/image-not-found.png'
+                    : articulo.ubicacion_articulo_min
+                "

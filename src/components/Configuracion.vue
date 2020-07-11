@@ -200,20 +200,10 @@ export default {
   background-color: #353535;
 }
 
-.banner_categoria {
-  background-size: cover;
-  background-position: center;
-  display: block;
-  position: fixed;
-  top: 80px;
-  width: 100%;
-  height: calc(33%);
-}
-
 .btnMenuRight {
   background-color: rgb(31, 31, 31) !important;
   position: fixed;
-  top: 5px;
+  top: 12px;
   right: 5px;
   background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
     0% no-repeat padding-box;
@@ -241,7 +231,7 @@ export default {
   width: 240px;
   margin-left: -120px;
   color: #fff;
-  font-family: AvenirNextLTPro-Regular !important;
+  font-family: FontMain !important;
   font-weight: 200;
   font-size: 23px !important;
   text-transform: uppercase;
@@ -260,13 +250,6 @@ export default {
   opacity: 1;
 }
 
-.productos {
-  position: fixed;
-  top: calc(34% + 80px);
-  width: 100%;
-  height: calc(100% - 46%);
-  overflow-y: auto;
-}
 
 .title_subcategoria {
   color: #eee;
@@ -508,7 +491,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/desayunos.jpg);
     background-size: cover;
     background-position: center;
   }
@@ -523,7 +505,7 @@ export default {
   }
 
   .btnMenuRight {
-    top: 15px;
+    top: 13px;
     right: 0;
   }
 
@@ -554,7 +536,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/desayunos.jpg);
     background-size: cover;
     background-position: center;
   }

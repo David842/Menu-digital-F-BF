@@ -1,24 +1,39 @@
 <template>
-  <div class="home">
-    <p class="nombre_categoria">
+  <div class="home" v-bind:style="jsonConfig.dataHome.bgHome">
+    <p
+      class="nombre_categoria"
+      v-bind:style="jsonConfig.dataCategorias.styleNombreView"
+    >
       {{ nombre_categoria }}
     </p>
     <!--<button @click="goToSlide(5)">Go to Slide Index 5</button>-->
-    <SideNav :showSideRight="showSideRight" />
+    <SideNav :showSideRight="showSideRight" :jsonConfig="jsonConfig" />
     <div>
       <md-button class="md-fab md-mini btnMenuReturn" @click="goBack">
-        <md-icon class="icon_btn_menu ic_back">keyboard_arrow_left</md-icon>
+        <md-icon
+          class="icon_btn_menu ic_back"
+          v-bind:style="jsonConfig.dataCategorias.iconBtnTopLeft"
+          >keyboard_arrow_left</md-icon
+        >
       </md-button>
 
-      <md-button class="md-fab md-mini btnMenuRight" @click="openSide">
-        <md-icon class="icon_btn_menu">menu</md-icon>
+      <md-button
+        class="md-fab md-mini btnMenuRight"
+        @click="openSide"
+        v-bind:style="jsonConfig.dataCategorias.btnTopLeft"
+      >
+        <md-icon
+          class="icon_btn_menu"
+          v-bind:style="jsonConfig.dataCategorias.iconBtnTopLeft"
+          >menu</md-icon
+        >
       </md-button>
     </div>
 
     <div
       class="banner_categoria"
       v-bind:style="{
-        'background-image': 'url(' + img_categoria + ')',
+        'background-image': 'url(\'' + img_categoria + '\')',
       }"
     >
       <h3 class="desc_categoria" v-if="descripcion_categoria">
@@ -49,16 +64,26 @@
             <md-card-media>
               <img
                 @click="openDialog(articulo)"
-                v-bind:src="articulo.ubicacion_articulo"
+                v-bind:src="
+                  typeof articulo.ubicacion_articulo_min === 'undefined' ||
+                  articulo.ubicacion_articulo_min == null || articulo.ubicacion_articulo_min === ''
+                    ? articulo.ubicacion_articulo
+                    : articulo.ubicacion_articulo_min
+                "
                 alt="Producto"
                 class="img_producto"
-                @load="loadImgArticulo"
+                @load="loadImgArticulo(articulo)"
                 @error="loadImgError(articulo)"
               />
             </md-card-media>
 
             <md-card-header class="header_title">
-              <div class="price">${{ parseFloat(articulo.precio) }}</div>
+              <div
+                class="price"
+                v-bind:style="jsonConfig.bgDegradedColorPrimary"
+              >
+                ${{ parseInt(articulo.precio) }}
+              </div>
               <div class="md-subhead title_producto">
                 {{ articulo.platillo }}
               </div>
@@ -66,9 +91,45 @@
           </md-card>
         </div>
       </div>
-    </div>
 
-    <div class="menu_home_bottom">
+      <div class="md-layout md-gutter  content-layout-producto">
+        <md-card
+          class="card_producto card_articulo"
+          :key="i"
+          v-for="(articulo, i) in categorias.articulos"
+          :index="i"
+        >
+          <md-card-media>
+            <img
+              @click="openDialog(articulo)"
+              v-bind:src="
+                typeof articulo.ubicacion_articulo_min === 'undefined' ||
+                  articulo.ubicacion_articulo_min == null || articulo.ubicacion_articulo_min === ''
+                    ? articulo.ubicacion_articulo
+                    : articulo.ubicacion_articulo_min
+              "
+              alt="Producto"
+              class="img_producto"
+              @load="loadImgArticulo(articulo)"
+              @error="loadImgError(articulo)"
+            />
+          </md-card-media>
+
+          <md-card-header class="header_title">
+            <div class="price" v-bind:style="jsonConfig.bgDegradedColorPrimary">
+              ${{ parseInt(articulo.precio) }}
+            </div>
+            <div class="md-subhead title_producto">
+              {{ articulo.platillo }}
+            </div>
+          </md-card-header>
+        </md-card>
+      </div>
+    </div>
+    <div
+      class="menu_home_bottom"
+      v-bind:style="jsonConfig.dataCategorias.style_menu_home_bottom"
+    >
       <md-button class="md-fab md-mini btnFav" @click="goToHome">
         <svg
           version="1.2"
@@ -153,17 +214,24 @@
     <md-icon class="icon_scroll_bottom">keyboard_arrow_down</md-icon>
     <div class="degradado"></div>
 
-    <md-dialog :md-active.sync="showDialog" class="dialog_producto_detalle">
+    <md-dialog
+      :md-active.sync="showDialog"
+      class="dialog_producto_detalle"
+      v-bind:class="jsonConfig.dataHome.classDialogCustom"
+    >
       <md-button class="md-fab md-mini btn_close" @click="closeDialog">
-        <md-icon class="icon_btn_menu">close</md-icon>
+        <md-icon
+          class="icon_btn_menu"
+          v-bind:style="jsonConfig.bgDegradedColorPrimary"
+          >close</md-icon
+        >
       </md-button>
 
       <div class="content_detalle">
         <div
           class="imagen_prod_detalle"
           v-bind:style="{
-            'background-image':
-              'url(' + '\'' + articuloSelected.ubicacion_articulo + '\')',
+            'background-image': 'url(' + '\'' + imagenAMostrar + '\')',
           }"
         >
           <p
@@ -172,7 +240,11 @@
           >
             {{ articuloSelected.descripcion_imagen }}
           </p>
-          <p v-if="articuloSelected.logo !== ''" class="simbologia_legal">
+          <p
+            v-if="articuloSelected.logo !== ''"
+            class="simbologia_legal"
+            v-bind:style="jsonConfig.bgDegradedColorPrimary"
+          >
             {{ articuloSelected.logo }}
           </p>
         </div>
@@ -190,9 +262,15 @@
           </md-avatar>
         </div>
 
-        <h3 class="title_platillo_detalle">
+        <h3
+          class="title_platillo_detalle"
+          v-bind:style="jsonConfig.dataDetalles.colorTitleProd"
+        >
           {{ articuloSelected.platillo }}
-          <span class="tam_platillo">
+          <span
+            class="tam_platillo"
+            v-bind:style="jsonConfig.dataDetalles.colorTitleProd"
+          >
             {{ articuloSelected.cantidad_x_porcion }}
           </span>
         </h3>
@@ -201,7 +279,21 @@
           {{ articuloSelected.descripcion_articulo }}
         </p>
 
-        <p class="terminos_platillo_detalle">
+        <div
+          class="md-layout md-gutter md-alignment-center-left card-extras"
+          v-if="false"
+        >
+          <div class="md-layout-item  md-size-45">
+            <p class="text_extra">
+              {{/*extra.nombre*/}}
+            </p>
+          </div>
+          <div class="md-layout-item  md-size-45">
+            <p class="text_extra">+ ${{/*parseInt(extra.precio_acapulco)*/}}</p>
+          </div>
+        </div>
+
+        <p class="terminos_platillo_detalle" v-bind:style="jsonConfig.b">
           {{ articuloSelected.simbologia }}
         </p>
 
@@ -235,15 +327,26 @@
         <md-button
           class="md-raised md-accent btn_add_orden"
           @click="showDialogAdd = true"
+          v-bind:style="jsonConfig.bgDegradedColorPrimary"
         >
           AGREGAR A MI LISTA
         </md-button>
       </div>
     </md-dialog>
 
-    <md-dialog :md-active.sync="showDialogAdd" class="dialog_producto_add">
-      <div class="content_add_prod">
-        <h3 class="title_platillo_detalle_list">
+    <md-dialog
+      :md-active.sync="showDialogAdd"
+      class="dialog_producto_add"
+      v-bind:class="jsonConfig.dataHome.classDialogCustom"
+    >
+      <div
+        class="content_add_prod"
+        v-bind:style="jsonConfig.dataDetalles.style_content_add_prod"
+      >
+        <h3
+          class="title_platillo_detalle_list"
+          v-bind:style="jsonConfig.dataDetalles.colorTitleProd"
+        >
           {{ articuloSelected.platillo }}
         </h3>
         <div class="md-layout md-gutter">
@@ -268,17 +371,81 @@
         </p>
 
         <md-dialog-actions>
-          <md-button class="btnConfirm" @click="addToList">Si</md-button>
-          <md-button class="md-primary btnCancel" @click="showDialogAdd = false"
+          <md-button
+            class="btnConfirm"
+            @click="addToList"
+            v-bind:style="jsonConfig.dataHome.btnConfirmar"
+            >Sí</md-button
+          >
+          <md-button
+            v-bind:style="jsonConfig.dataHome.btnCancel"
+            class="md-primary btnCancel"
+            @click="showDialogAdd = false"
             >No</md-button
           >
         </md-dialog-actions>
       </div>
     </md-dialog>
+
+    <md-dialog
+      :md-active.sync="showDialogExtra"
+      class="dialog_producto_add"
+      v-bind:class="jsonConfig.dataHome.classDialogCustom"
+    >
+      <div
+        class="content_add_prod"
+        v-bind:style="jsonConfig.dataDetalles.style_content_add_prod"
+      >
+        <h3
+          class="title_platillo_detalle_list"
+          v-bind:style="jsonConfig.dataDetalles.colorTitleProd"
+        >
+          {{ articuloSelected.platillo }}
+        </h3>
+        <div class="md-layout md-gutter">
+          <div
+            class="md-layout-item md-size-50 content_medida"
+            :key="j"
+            v-for="(medida, j) in articuloSelected.medidas"
+            @click="selectMedida(medida)"
+          >
+            <p
+              class="desc_medida"
+              v-bind:class="{
+                select_medida: medida.selected == 0 ? false : true,
+              }"
+            >
+              {{ medida.nombre_medida }}
+            </p>
+          </div>
+        </div>
+        <p class="txt_advertencia">
+          ¿Desea agregar un extra?
+        </p>
+
+        <md-dialog-actions>
+          <md-button
+            class="btnConfirm"
+            @click="addToList"
+            v-bind:style="jsonConfig.dataHome.btnConfirmar"
+            >Sí</md-button
+          >
+          <md-button
+            v-bind:style="jsonConfig.dataHome.btnCancel"
+            class="md-primary btnCancel"
+            @click="showDialogAdd = false"
+            >No</md-button
+          >
+        </md-dialog-actions>
+      </div>
+    </md-dialog>
+
+    <p style="clear: both;"></p>
     <ListaParaOrdenar
       v-if="showLista"
       @closeLista="closeLista"
       :listaParaOrdenar="listaParaOrdenar"
+      :jsonConfig="jsonConfig"
     />
   </div>
 </template>
@@ -287,12 +454,12 @@
 //import SideNav from "@/components/SideNav.vue";
 //import ListaParaOrdenar from "@/components/ListaParaOrdenar.vue";
 import { Carousel3d, Slide, Controls } from "vue-carousel-3d";
+//import json from "../assets/config/toks.json";
 
 export default {
   name: "Home",
   data() {
     return {
-      baseURL: "https://www.menugrg.com.mx:7443/",
       categorias: [],
       showSideRight: false,
       experiencias: [],
@@ -301,6 +468,7 @@ export default {
       widthItemExp: 320,
       showDialog: false,
       showDialogAdd: false,
+      showDialogExtra: false,
       nombre_categoria: "Categoria",
       descripcion_categoria: null,
       img_categoria: "nu",
@@ -312,6 +480,8 @@ export default {
       listaParaOrdenar: [],
       medidaSelected: [],
       nPedidos: 0,
+      jsonConfig: this.$json,
+      imagenAMostrar: null,
     };
   },
   components: {
@@ -379,7 +549,11 @@ export default {
             const obj = {
               id_articulo: this.medidaSelected.id,
               ubicacion_articulo: this.articuloSelected.ubicacion_articulo,
-              platillo: this.medidaSelected.nombre_medida,
+              platillo:
+                this.articuloSelected.platillo +
+                "(" +
+                this.medidaSelected.nombre_medida +
+                ")",
               precio: this.articuloSelected.precio,
               cantidad_articulo: 1,
               selected: 0,
@@ -389,7 +563,11 @@ export default {
             const obj = {
               id_articulo: this.medidaSelected.id,
               ubicacion_articulo: this.articuloSelected.ubicacion_articulo,
-              platillo: this.medidaSelected.nombre_medida,
+              platillo:
+                this.articuloSelected.platillo +
+                "(" +
+                this.medidaSelected.nombre_medida +
+                ")",
               precio: this.medidaSelected.precio,
               cantidad_articulo: 1,
               selected: 0,
@@ -439,11 +617,17 @@ export default {
         }
       );
     },
-    loadImgArticulo() {
-      //alert();
+    loadImgArticulo(articulo) {
+      
+      if (articulo.ubicacion_articulo === "") {
+        //alert("sin imagen");
+      }
     },
     loadImgError(articulo) {
+     // alert();
+      articulo.ubicacion_articulo_min = require("../assets/img/image-not-found.png");
       articulo.ubicacion_articulo = require("../assets/img/image-not-found.png");
+      //articulo.ubicacion_articulo = "https://pruebasgerard.com/menudigital/categorias/Volcanes.1593472406.jpg";
       //alert(articulo.ubicacion_articulo);
     },
     closeDialog() {
@@ -482,7 +666,7 @@ export default {
     },
     openDialog(articulo) {
       console.log("hola");
-      console.log(articulo.medidas);
+      console.log(articulo);
       if (articulo.medidas.length === 0) {
       } else {
         articulo.medidas[0].selected = 1;
@@ -490,10 +674,26 @@ export default {
       }
 
       this.articuloSelected = articulo;
+      if (
+        articulo.detalle_imagen === "null" ||
+        articulo.detalle_imagen === ""
+      ) {
+        console.log(articulo.ubicacion_articulo);
+        if (
+          articulo.ubicacion_articulo === null
+        ) {
+          this.imagenAMostrar = require("../assets/img/image-not-found.png");;
+        } else {
+          this.imagenAMostrar = articulo.ubicacion_articulo;
+        }
+      } else {
+        this.imagenAMostrar = articulo.detalle_imagen;
+      }
       this.showDialog = true;
     },
     goToHome() {
-      this.$router.push("/");
+      //this.$router.push("/");
+      this.$router.go(-1);
     },
     goBack() {
       this.$router.go(-1);
@@ -503,7 +703,6 @@ export default {
         document.execCommand("Stop", false);
       }
       //this.$router.push("/home/" + this.$route.params.id);
-      
     },
   },
   mounted() {
@@ -526,25 +725,6 @@ export default {
       }
     }
 
-    var ca = decodedCookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(id_unidad_eks) === 0) {
-        id_unidad = c.substring(id_unidad_eks.length, c.length);
-        break;
-      }
-    }
-
-    if (id_unidad === "") {
-      //alert("id unidad en 0");
-      id_unidad = this.$route.query.id_unidad;
-    }
-
-    //alert(id_unidad);
-
     if (lista != "") {
       //alert();
       var arr = JSON.parse(lista);
@@ -554,13 +734,14 @@ export default {
     }
 
     const baseURI =
-      this.baseURL + "menudigital/index.php/articulo/articulos_categoria";
+      this.$baseURL + "/menudigital/index.php/articulo/articulos_categoria";
     this.$http
       .get(
         baseURI,
         {
           params: {
-            sucursal: id_unidad,
+            sucursal: localStorage.getItem("id_unidad_eks"),
+            id_marca: this.$id_marca,
             categoria: this.$route.query.categoria,
             token:
               "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
@@ -569,12 +750,18 @@ export default {
         { "Access-Control-Allow-Origin": "*" }
       )
       .then((res) => {
-        console.log(res);
         if (res.data.status === "OK") {
-          //this.nombre_categoria = res.data.categoria.categoria;
+          console.log(res.data);
           this.descripcion_categoria = res.data.categoria.descripcion;
-          //this.img_categoria = res.data.categoria.ubicacion;
           this.categorias = res.data.categoria;
+
+          res.data.categoria.subcategoria.map((item, index) => {
+            console.log(item.articulos[index]);
+            //item.articulos[index].articulos.map((itemSub) => {
+            //console.log(item.articulos);
+            console.log("entro");
+            //});
+          });
           //Object.assign(item, {key3: "value3"});
 
           this.sending = false;
@@ -601,7 +788,7 @@ export default {
 body {
   background: #2f2f30 0% 0% no-repeat padding-box;
   opacity: 1;
-  font-family: AvenirNextLTPro-Regular;
+  font-family: FontMain;
   /*height: 100vh;*/
 }
 
@@ -869,7 +1056,7 @@ body {
   border-top-left-radius: 20px;
   padding-right: 10px;
   font-weight: 200 !important;
-  font-family: AvenirNextLTPro-Regular;
+  font-family: FontMain;
 }
 
 .primary_color_bg {
@@ -916,7 +1103,7 @@ body {
   position: fixed;
   top: 80px;
   width: 100%;
-  height: calc(28%);
+  height: calc(30%);
   z-index: 1;
 }
 
@@ -928,7 +1115,7 @@ body {
   position: fixed;
   top: 14px;
   right: 5px;
-  z-index: 5 !important;
+  /*z-index: 5 !important;*/
 }
 
 .btnMenuReturn {
@@ -943,10 +1130,16 @@ body {
 
 .btnCancel {
   color: #fff !important;
+  box-shadow: 2px 2px 2px #00000080;
+  border-radius: 24px;
+  opacity: 1;
 }
 
 .btnConfirm {
   color: #fff !important;
+  box-shadow: 2px 2px 2px #00000080;
+  border-radius: 24px;
+  opacity: 1;
 }
 
 .nombre_categoria {
@@ -956,10 +1149,8 @@ body {
   width: 240px;
   margin-left: -120px;
   color: #fff;
-  font-family: AvenirNextLTPro-Regular !important;
+  font-family: FontMain !important;
   font-size: 18px;
-  background-color: rgb(31, 31, 31);
-  border: 1px solid rgba(54, 54, 54, 0.418);
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
@@ -969,24 +1160,33 @@ body {
   text-transform: uppercase;
   font-size: 2.5vh;
 
-  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+  /*background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
     0% no-repeat padding-box;
-  box-shadow: 0px 2px 2px #191919;
-  border-radius: 25px;
+  background: transparent
+    linear-gradient(
+      180deg,
+      var(--unnamed-color-191919) 0%,
+      var(--unnamed-color-00000000) 100%
+    )
+    0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0%
+    0% no-repeat padding-box;*/
+  box-shadow: 0px 1px 0px #5b5b5b;
+  border-radius: 24px;
   opacity: 1;
 }
 
 .productos {
   position: fixed;
-  top: calc(34% + 33px);
+  top: calc(34% + 55px);
   width: 100%;
   height: calc(100% - 40%);
   overflow-y: auto;
   padding-bottom: 60px;
   padding-top: 12px;
   /*Pendiente
-  background:linear-gradient( 181deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.06) -5%, rgba(0, 0, 0, 0.73) 79% );*/
-  background: linear-gradient(181deg, #2f2f30 0%, #2f2f30 60%, #0f0f0f 95%);
+  background:linear-gradient( 181deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.06) -5%, rgba(0, 0, 0, 0.73) 79% );
+  background: linear-gradient(181deg, #2f2f30 0%, #2f2f30 60%, #0f0f0f 95%);*/
 }
 
 .title_subcategoria {
@@ -1030,6 +1230,18 @@ body {
   box-shadow: none !important;
 }
 
+.content-layout-producto {
+  /*overflow: auto;*/
+  height: 54% !important;
+  overflow: auto !important;
+  padding-bottom: 18px !important;
+}
+
+.content-layout-producto > div {
+  margin-bottom: 50px !important;
+  padding-bottom: 18px !important;
+}
+
 .header_title {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
@@ -1063,7 +1275,7 @@ body {
   /*align-items: center;
   vertical-align: middle;*/
 
-  font-family: AvenirNextLTPro-Regular;
+  font-family: FontMain;
 }
 
 .subcategoria {
@@ -1074,7 +1286,7 @@ body {
   padding: 10px;
   white-space: nowrap;
   overflow-x: auto;
-  font-family: AvenirNextLTPro-Regular;
+  font-family: FontMain;
   position: relative;
 }
 
@@ -1116,19 +1328,32 @@ body {
   position: relative;
 }
 
+.dialog_producto_detalle {
+  transition-duration: inherit;
+  overflow: auto;
+}
+
 .dialog_producto_detalle > div {
-  background-color: inherit !important;
+  background: inherit !important;
   width: 92% !important;
   padding: 10px;
   max-height: fit-content;
   box-shadow: none;
   position: relative;
+  height: auto !important;
+  transition: inherit;
 }
 
 .dialog_producto_add > div {
   width: 75% !important;
   background-color: rgba(41, 41, 41, 0) !important;
   box-shadow: no;
+  height: auto;
+  border: 15px !important;
+}
+
+.dialog_producto_add > div > div {
+  border: none !important;
 }
 
 .dialog_producto_add {
@@ -1147,7 +1372,7 @@ body {
 }
 
 .title_platillo_detalle {
-  color: #f58220 !important;
+  /*color: #f58220 !important;*/
   padding-left: 20px;
   font-weight: normal;
   width: 78%;
@@ -1201,6 +1426,22 @@ body {
   white-space: pre-line;
 }
 
+.card-extras {
+  margin-top: 0px;
+}
+
+.text_extra {
+  color: #eee;
+  padding-left: 20px;
+  padding-right: 20px;
+  line-height: 1.2;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  white-space: pre-line;
+  text-align: left !important;
+}
+
 .terminos_platillo_detalle {
   margin-top: 10px !important;
   font-size: 12px;
@@ -1209,6 +1450,8 @@ body {
   padding-right: 20px;
   white-space: pre-line;
   line-height: 1.3;
+  max-height: 18vh;
+  overflow: auto;
 }
 
 .content-medidas {
@@ -1245,11 +1488,17 @@ body {
 }
 
 .content_add_prod {
-  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+  /*background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
     0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000042;
+  box-shadow: 0px 3px 6px #00000042;*/
   border-radius: 15px;
   opacity: 1;
+}
+
+.content_add_prod > div {
+  width: fit-content;
+  margin-left: auto !important;
+  margin: auto !important;
 }
 
 .btn_add_orden {
@@ -1281,9 +1530,10 @@ body {
   margin-right: auto;
   display: block;
   margin-bottom: 0px;
-  background-color: #f58220 !important;
+  /*background-color: #f58220 !important;*/
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
+  background-color: inherit !important;
 }
 
 .btn_close > div > div > i {
@@ -1348,7 +1598,7 @@ body {
 }
 
 .desc_medida {
-  width: 83%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 5px;
@@ -1363,7 +1613,7 @@ body {
 }
 
 .select_medida {
-  border: 1px solid #f58220;
+  border: 1px solid #fff;
 }
 
 .desc_categoria {
@@ -1506,7 +1756,50 @@ body {
   margin-top: 8px;
 }
 
+.content-layout-producto {
+  position: fixed;
+  width: 400px;
+  left: 50%;
+  margin-left: -45% !important;
+}
+
+.content_producto {
+  display: inline;
+}
+
+.layout-producto {
+  margin-bottom: 40px;
+  width: fit-content !important;
+  min-width: inherit !important;
+  max-width: inherit !important;
+  display: contents;
+  margin-left: 10px !important;
+}
+
+ul#menu {
+  list-style-type: none;
+  margin: 20px 0px;
+  padding: 0px;
+}
+ul#menu li {
+  float: left;
+}
+ul#menu li {
+  display: block;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #1a1a1a;
+  background-color: #b3b3b3;
+  text-decoration: none;
+  color: #333;
+  font-size: 110%;
+}
+
 @media (min-width: 320px) and (max-width: 400px) {
+  .imagen_prod_detalle {
+    height: 32vh;
+  }
+
   .btn_close {
     right: 1%;
     top: 9%;
@@ -1516,22 +1809,21 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/desayunos.jpg);
     background-size: cover;
     background-position: center;
   }
 
   .nombre_categoria {
     font-size: 15px;
-    top: 0px;
+    top: 4px;
     left: 50%;
-    width: 180px;
-    margin-left: -90px;
+    width: 230px;
+    margin-left: -120px;
     font-size: 14px;
   }
 
   .btnMenuRight {
-    top: 15px;
+    top: 10px;
     right: 0;
   }
 
@@ -1548,9 +1840,25 @@ body {
     padding-right: 0px;
   }
 
+  .terminos_platillo_detalle {
+    margin-bottom: 0;
+    font-size: 95%;
+    max-height: 14vh;
+  }
+
+  .desc_platillo_detalle {
+    font-size: 95%;
+    max-height: 25vh;
+    overflow: auto;
+  }
+
   .card_producto {
     height: 120px !important;
     width: 120px !important;
+  }
+
+  .card-medidas {
+    padding-top: 0px;
   }
 
   .img_producto {
@@ -1560,14 +1868,52 @@ body {
   .title_producto.title_producto {
     font-size: 12px !important;
   }
+
+  .content-layout-producto {
+    position: fixed !important;
+    width: 320px !important;
+    left: 50% !important;
+    margin-left: -150px !important;
+  }
+
+  .card-medidas > p {
+    margin-top: 20px !important;
+    font-size: 93%;
+  }
 }
 
-@media (min-width: 400px) and (max-width: 480px) {
+@media (min-width: 400px) and (max-width: 498px) {
+  .content-layout-producto {
+    position: fixed !important;
+    width: 320px !important;
+    left: 50% !important;
+    margin-left: -150px !important;
+  }
+
+  .card-medidas > p {
+    margin-top: 14px !important;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 601px) {
+  .md-dialog-fullscreen {
+    transform: translate(0) !important;
+  }
 }
 
 @media (min-width: 600px) and (max-width: 767px) {
   .dialog_producto_detalle > div {
     width: 67% !important;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 700px) {
+  .content-layout-producto {
+    position: fixed !important;
+    width: 480px !important;
+    left: 50% !important;
+    margin-left: -225px !important;
   }
 }
 
@@ -1580,9 +1926,35 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/desayunos.jpg);
     background-size: cover;
     background-position: center;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .content-layout-producto {
+    position: fixed !important;
+    width: 480px !important;
+    left: 50% !important;
+    margin-left: -225px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .content-layout-producto {
+    position: fixed !important;
+    width: 800px !important;
+    left: 50% !important;
+    margin-left: -400px !important;
+  }
+}
+
+@media (min-width: 1201px) {
+  .content-layout-producto {
+    position: fixed !important;
+    width: 950px !important;
+    left: 50% !important;
+    margin-left: -460px !important;
   }
 }
 
@@ -1635,5 +2007,38 @@ body {
   .dialog_producto_add > div {
     width: 28% !important;
   }
+}
+
+/**/
+.dialog_customToks > div {
+  /*background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+    0% no-repeat padding-box;
+    border: 2px solid #F58220;
+    background: inherit ;*/
+}
+
+.dialog_customBF > div > .content_detalle {
+  background: transparent
+    linear-gradient(
+      180deg,
+      var(--unnamed-color-00000000) 0%,
+      var(--unnamed-color-191919) 100%
+    )
+    0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px var(--unnamed-color-00000000);
+  background: transparent linear-gradient(180deg, #000000 0%, #191919 100%) 0%
+    0% no-repeat padding-box;
+  border: 2px solid #e9bf7d;
+  background-color: inherit !important;
+}
+
+.dialog_customBF > div {
+  background: inherit;
+}
+
+.dialog_customElFarolito > div > .content_detalle {
+  background: transparent linear-gradient(180deg, #cf1a33 0%, #ad182d 100%) 0%
+    0% no-repeat padding-box;
+  border: 1px solid #fff;
 }
 </style>

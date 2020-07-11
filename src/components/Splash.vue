@@ -1,6 +1,10 @@
 <template>
-  <div class="splash">
-    <md-button class="md-raised md-accent btnLocal" @click="showDialogUnidades">
+  <div class="splash" v-bind:style="styles.dataHome.fondo_home">
+    <md-button
+      class="md-raised md-accent btnLocal"
+      v-bind:style="styles.dataHome.btnLocal"
+      @click="showDialogUnidades"
+    >
       <svg
         class="pin_loc pin_loc_btn"
         version="1.2"
@@ -15,12 +19,12 @@
       >
         <g>
           <path
-            class="primary_color_bg"
+            v-bind:style="styles.fiillColorPrimary"
             d="M256,146.54c-34.36,0-62.32,27.95-62.32,62.32s27.95,62.32,62.32,62.32c34.36,0,62.32-27.95,62.32-62.32
 		S290.36,146.54,256,146.54z"
           />
           <path
-            class="second_color_bg"
+            v-bind:style="styles.fiillColorPrimary"
             d="M256,0C114.62,0,0,114.62,0,256s114.62,256,256,256s256-114.62,256-256S397.38,0,256,0z M264.3,423.3
 		c-4.42,4.93-12.16,4.94-16.6,0c-4.72-5.26-115.56-129.68-115.56-214.44C132.14,140.56,187.7,85,256,85
 		c68.3,0,123.86,55.56,123.86,123.86C379.86,293.62,269.02,418.04,264.3,423.3z"
@@ -38,23 +42,44 @@
       </h3>
     </md-button>
 
-    <a href="#" class="photo" v-bind:class="{ logo_empresa: reflejo }">
-      <img src="../assets/img/logo_toks.png" />
-
-      <div class="glow-wrap">
+    <a
+      href="#"
+      class="photo"
+      v-bind:class="[
+        { logo_empresa: reflejo },
+        styles.dataHome.class_logo_home,
+      ]"
+    >
+      <img
+        class="logo_home_img"
+        :src="styles.dataHome.src_logo_home"
+        v-bind:styles="styles.dataHome.styleLogo_home"
+      />
+      <img
+        v-if="styles.dataHome.src_sello !== null ? true : false"
+        class="logo_sello"
+        :src="styles.dataHome.src_sello"
+        v-bind:styles="styles.dataHome.class_sello_home"
+      />
+      <div class="glow-wrap img-">
         <i class="glow"></i>
       </div>
     </a>
 
-    <h3 class="titulo_eslogan">Estar aquí, está mejor.</h3>
+    <h3 class="titulo_eslogan" v-if="styles.dataHome.title_eslogan !== null">
+      {{ styles.dataHome.title_eslogan }}
+    </h3>
 
     <div class="fondo_pie"></div>
-    <md-button class="md-raised md-accent btn_go_menu" @click="goMenu">
+    <md-button
+      class="md-raised md-accent btn_go_menu"
+      v-bind:style="styles.styleBtnHome"
+      @click="goMenu"
+    >
       MENÚ
     </md-button>
-    <div class="menu-bottom">
+    <div class="menu-bottom" v-bind:style="styles.bgDegradedSecondColor">
       <md-button class="md-fab md-mini btn_menu" @click="openSideLeft">
-        <!--<md-icon class="icon_btn_menu">menu</md-icon>-->
         <svg
           class="ic_menu"
           version="1.2"
@@ -68,17 +93,17 @@
           xml:space="preserve"
         >
           <path
-            class="primary_color_bg"
+            v-bind:style="styles.fiillColorPrimary"
             d="M479.05,279.93H32.95c-18.21,0-32.97-14.76-32.97-32.97v0c0-18.21,14.76-32.97,32.97-32.97h446.09
 	c18.21,0,32.97,14.76,32.97,32.97v0C512.01,265.17,497.25,279.93,479.05,279.93z"
           />
           <path
-            class="primary_color_bg"
+            v-bind:style="styles.fiillColorPrimary"
             d="M479.05,114.93H32.95c-18.21,0-32.97-14.76-32.97-32.97v0C-0.01,63.76,14.75,49,32.95,49h446.09
 	c18.21,0,32.97,14.76,32.97,32.97v0C512.01,100.17,497.25,114.93,479.05,114.93z"
           />
           <path
-            class="primary_color_bg"
+            v-bind:style="styles.fiillColorPrimary"
             d="M479.05,443.47H32.95c-18.21,0-32.97-14.76-32.97-32.97v0c0-18.21,14.76-32.97,32.97-32.97h446.09
 	c18.21,0,32.97,14.76,32.97,32.97v0C512.01,428.71,497.25,443.47,479.05,443.47z"
           />
@@ -103,7 +128,7 @@
           <g>
             <g>
               <path
-                class="primary_color_bg"
+                v-bind:style="styles.fiillColorPrimary"
                 d="M467,61H45C20.22,61,0,81.2,0,106v300c0,24.72,20.13,45,45,45h422c24.72,0,45-20.13,45-45V106C512,81.28,491.87,61,467,61
 			z M460.79,91L256.95,294.83L51.36,91H460.79z M30,399.79V112.07l144.48,143.24L30,399.79z M51.21,421l144.57-144.57l50.66,50.22
 			c5.86,5.81,15.33,5.8,21.17-0.05L317,277.21L460.79,421H51.21z M482,399.79L338.21,256L482,112.21V399.79z"
@@ -113,17 +138,22 @@
         </svg>
       </md-button>
     </div>
-    <md-dialog :md-active.sync="showDialog" class="dialog_custom">
+    <md-dialog
+      :md-active.sync="showDialog"
+      class="dialog_custom"
+      v-bind:class="styles.dataHome.classDialogCustom"
+      :md-click-outside-to-close="false"
+    >
       <h3 class="title_dialog_inicio" v-if="seEncontroUbicacion">
-        ¿Donde te encuentras?
+        ¿Dónde te encuentras?
       </h3>
       <h3 class="title_dialog_inicio" v-else>Confírmanos tu ubicación</h3>
 
-      <div class="md-layout-item" v-if="seEncontroUbicacion">
-      </div>
+      <div class="md-layout-item" v-if="seEncontroUbicacion"></div>
 
       <md-button
         class="md-raised md-accent btnLocal btnUbicacion"
+        v-bind:style="styles.dataHome.btnUbicacion"
         @click="showDialogUnidades"
         v-if="seEncontroUbicacion !== true"
       >
@@ -141,19 +171,19 @@
         >
           <g>
             <path
-              class="primary_color_bg"
+              v-bind:style="styles.fiillColorPrimary"
               d="M256,146.54c-34.36,0-62.32,27.95-62.32,62.32s27.95,62.32,62.32,62.32c34.36,0,62.32-27.95,62.32-62.32
 		S290.36,146.54,256,146.54z"
             />
             <path
-              class="second_color_bg"
+              v-bind:style="styles.fiillColorPrimary"
               d="M256,0C114.62,0,0,114.62,0,256s114.62,256,256,256s256-114.62,256-256S397.38,0,256,0z M264.3,423.3
 		c-4.42,4.93-12.16,4.94-16.6,0c-4.72-5.26-115.56-129.68-115.56-214.44C132.14,140.56,187.7,85,256,85
 		c68.3,0,123.86,55.56,123.86,123.86C379.86,293.62,269.02,418.04,264.3,423.3z"
             />
           </g>
         </svg>
-        <h3 class="txt_marca_seleccionada">
+        <h3 class="txt_marca_seleccionada txt_marca_seleccionada_dialog">
           {{
             /*unidadUbicada.length > 8
             ? unidadUbicada.substring(0, 8) + "..."
@@ -164,24 +194,28 @@
       </md-button>
 
       <div class="list-select-unidad" v-if="seEncontroUbicacion">
-        <md-list >
+        <md-list>
           <md-list-item
             md-expand
             :md-expanded.sync="expandEstados"
             class="item-list-estados"
             @click="clicListEstados"
           >
-            <md-icon class="ic_elige_sucursal">place</md-icon>
-            <span class="md-list-item-text">{{estadoSelected}}</span>
+            <md-icon
+              class="ic_elige_sucursal"
+              v-bind:style="styles.dataHome.colorIcon"
+              >place</md-icon
+            >
+            <span class="md-list-item-text">{{ estadoSelected }}</span>
 
             <md-list slot="md-expand" class="list-estados">
               <md-list-item
                 class="md-inset inset-list"
                 v-for="itemEstado in estadosSelect"
                 :key="itemEstado"
-                :value="itemEstado.id"
+                :value="itemEstado"
                 @click="selectedEstado(itemEstado)"
-                >{{ itemEstado.nombre }}</md-list-item
+                >{{ itemEstado.nombre_estado }}</md-list-item
               >
             </md-list>
           </md-list-item>
@@ -190,17 +224,21 @@
             class="item-list-estados"
             md-expand
             :md-expanded.sync="expandUnidades"
+            @click="expandUnidadesEvent"
           >
-            <md-icon class="ic_elige_sucursal">store_mall_directory</md-icon>
-            <span class="md-list-item-text">{{unidadSelectedDialog}}</span>
+            <md-icon
+              class="ic_elige_sucursal"
+              v-bind:style="styles.dataHome.colorIcon"
+              >store_mall_directory</md-icon
+            >
+            <span class="md-list-item-text">{{ unidadSelectedDialog }}</span>
 
             <md-list slot="md-expand" @click="clicListUnidades">
               <md-list-item
-                
                 class="md-inset inset-list"
                 v-for="itemUnidad in unidadesXEstado"
                 :key="itemUnidad"
-                :value="itemUnidad.id"
+                :value="itemUnidad"
                 @click="selectedUnidad(itemUnidad)"
               >
                 {{ itemUnidad.nombre }}</md-list-item
@@ -211,32 +249,58 @@
       </div>
 
       <md-dialog-actions v-if="seEncontroUbicacion !== false">
-        <md-button class="btnConfirm btnConfirmUnidad" @click="confirmar">Confirmar</md-button>
-        <!--<md-button class="md-primary btnCancel" @click="botonNo">No</md-button>-->
+        <md-button
+          class="btnConfirm btnConfirmUnidad"
+          v-bind:style="jsonConfig.dataHome.btnConfirmar"
+          @click="confirmar"
+          >Confirmar</md-button
+        >
       </md-dialog-actions>
 
-      <md-dialog-actions v-if="seEncontroUbicacion !== true">
-        <md-button class="btnConfirm" @click="showDialog = false">Si</md-button>
-        <md-button class="md-primary btnCancel" @click="botonNo">No</md-button>
+      <md-dialog-actions
+        v-if="seEncontroUbicacion !== true"
+        class="dialog-actions-splash"
+      >
+        <md-button
+          class="btnConfirm"
+          @click="showDialog = false"
+          :disabled="loading"
+          v-bind:style="jsonConfig.dataHome.btnConfirmar"
+          >Sí</md-button
+        >
+        <md-button
+          v-bind:style="styles.dataHome.btnCancel"
+          class="md-primary btnCancel"
+          @click="botonNo"
+          >No</md-button
+        >
       </md-dialog-actions>
     </md-dialog>
 
-     <md-snackbar :md-position="position" :md-duration="4000" :md-active.sync="showSnackbar" md-persistent>
-      <span>Porfavor selecciona una sucursal</span>
-      <md-button class="md-primary" @click="showSnackbar = false">Cerrar</md-button>
+    <md-snackbar
+      :md-duration="4000"
+      :md-active.sync="showSnackbar"
+      md-persistent
+    >
+      <span>Por favor selecciona un restaurante</span>
+      <md-button class="md-primary" @click="showSnackbar = false"
+        >Cerrar</md-button
+      >
     </md-snackbar>
   </div>
 </template>
 
 <script>
-//import Configuracion from "./Configuracion.vue";
-
 export default {
   name: "Splash",
+  props: {
+    jsonConfig: Object,
+  },
   data() {
     return {
+      styles: this.jsonConfig,
+      loading: true,
       showSnackbar: false,
-      baseURL: "https://www.menugrg.com.mx:7443/",
       seEncontroUbicacion: false,
       showConfiguracion: false,
       marker: null,
@@ -244,16 +308,15 @@ export default {
       reflejo: false,
       unidadSelected: { nombre: "Buscando.." },
       unidadUbicada: "Buscando...",
-      showPicker: false,
       showSideLeftUser: true,
       unidades: [],
       estadosSelect: [],
       unidadesSelect: [],
-      unidadesXEstado: [{nombre: "Selecciona un estado",id: -1}],
+      unidadesXEstado: [{ nombre: "Selecciona un estado", id: -1 }],
       expandEstados: false,
       expandUnidades: false,
       estadoSelected: "Estado",
-      unidadSelectedDialog: "Sucursal",
+      unidadSelectedDialog: "Restaurante",
       id_estado: null,
       idUnidadSelected: null,
       datas: [
@@ -268,65 +331,56 @@ export default {
       ],
     };
   },
-
-  created() {
-    //alert(localStorage.getItem('id_unidad_eks'));
-  },
   mounted() {
     this.showDialogUnidades();
   },
   methods: {
+    expandUnidadesEvent(){
+      this.expandEstados = false;
+    },
     clicListEstados() {
-      // alert(this.expandEstados);
       if (this.expandEstados === false) {
         this.expandUnidades = false;
+      }else{
+        this.expandEstados = false;
       }
     },
     clicListUnidades() {
+      //alert();
       if (this.expandEstados === false) {
+        this.expandEstados = false;
+      }else{
         this.expandEstados = false;
       }
     },
     selectedEstado(itemEstado) {
-      console.log(itemEstado);
       this.unidadesXEstado = [];
       this.expandEstados = false;
       this.expandUnidades = true;
-      this.estadoSelected = itemEstado.nombre;
-      // alert(this.id_estado);
+      this.estadoSelected = itemEstado.nombre_estado;
+
       this.unidadesSelect.map((item, index) => {
         if (item.id_estado === itemEstado.id) {
-          console.log("-----");
           this.unidadesXEstado.push(item);
         }
       });
     },
     selectedUnidad(itemUnidad) {
-      //console.log(itemUnidad);
-      if(itemUnidad.id === -1){
-        
-      }else{
+      if (itemUnidad.id === -1) {
+      } else {
         this.expandUnidades = false;
-      this.unidadSelectedDialog = itemUnidad.nombre;
-      this.idUnidadSelected = itemUnidad.id;
+        this.unidadSelectedDialog = itemUnidad.nombre;
+        this.idUnidadSelected = itemUnidad.id;
       }
-      //alert(this.idUnidadSelected);
     },
-    confirmar(){
-      
-            if(this.idUnidadSelected !==null){
-              localStorage.setItem(
-              "id_unidad_eks",
-              this.idUnidadSelected
-            );
-            this.showDialog = false;
-      this.unidadSelected.nombre = this.unidadSelectedDialog;
-              //alert(this.idUnidadSelected);
-            }else{
-               //alert("Porfavor selecciona una sucursal");
-               this.showSnackbar = true;
-            }
-      
+    confirmar() {
+      if (this.idUnidadSelected !== null) {
+        localStorage.setItem("id_unidad_eks", this.idUnidadSelected);
+        this.showDialog = false;
+        this.unidadSelected.nombre = this.unidadSelectedDialog;
+      } else {
+        this.showSnackbar = true;
+      }
     },
     openConfiguracion() {
       this.showConfiguracion = true;
@@ -383,17 +437,12 @@ export default {
             a.obtenerEstadoByBD(pos.lat, pos.lng);
           },
           function(error) {
-            //a.unidadUbicada = a.unidades[0].nombre;
-            //a.unidadSelected.nombre = a.unidades[0].nombre;
-            //document.cookie = "id_unidad_eks=" + a.unidades[0].id_sucursal;
-            //localStorage.setItem('id_unidad_eks', res.data.registros[0].id_sucursal);
             a.obtenerEstadoByBD("", "");
-            //alert("buscar sun cordenadas");
           },
           {
             enableHighAccuracy: true,
             altitude: 100,
-            timeout: 60000,
+            timeout: 90000,
             maximumAge: 6000,
           }
         );
@@ -402,13 +451,13 @@ export default {
       }
     },
     showDialogUnidades() {
-      this.showDialog = true; 
+      this.showDialog = true;
       this.getUbicacion();
     },
     obtenerEstadoByBD(lat, lng) {
       var context = this;
       const baseURI =
-        this.baseURL + "menudigital/index.php/sucursal/sucursales_estados";
+        this.$baseURL + "/menudigital/index.php/sucursal/sucursales_estados";
       this.$http
         .get(
           baseURI,
@@ -416,7 +465,7 @@ export default {
             params: {
               latitud: lat,
               longitud: lng,
-              id_marca: "1",
+              id_marca: this.$id_marca,
               token:
                 "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
             },
@@ -427,38 +476,44 @@ export default {
           if (res.data.status === "OK") {
             context.unidades = [];
             context.datas[0].list = [];
+            console.log(res.data.registros);
+            if (res.data.registros.length > 0) {
+              context.unidadUbicada = res.data.registros[0].nombre_sucursal;
+              context.loading = false;
+              context.unidadSelected.nombre =
+                res.data.registros[0].nombre_sucursal;
 
-            context.unidadUbicada = res.data.registros[0].nombre_sucursal;
-            context.unidadSelected.nombre =
-              res.data.registros[0].nombre_sucursal;
-            //document.cookie = "id_unidad_eks=" + res.data.registros[0].id_sucursal;
-            localStorage.setItem(
-              "id_unidad_eks",
-              res.data.registros[0].id_sucursal
-            );
+              localStorage.setItem(
+                "id_unidad_eks",
+                res.data.registros[0].id_sucursal
+              );
 
-            res.data.registros.map((item, index) => {
-              this.datas[0].list.push(item.nombre_sucursal);
-              this.unidades.push({
-                id_sucursal: item.id_sucursal,
-                nombre: item.nombre_sucursal,
-                nombre_estado: item.nombre_estado,
-                position: { lat: item.latitud, lng: item.longitud },
-                distance: 0,
+              res.data.registros.map((item, index) => {
+                this.datas[0].list.push(item.nombre_sucursal);
+                this.unidades.push({
+                  id_sucursal: item.id_sucursal,
+                  nombre: item.nombre_sucursal,
+                  nombre_estado: item.nombre_estado,
+                  position: { lat: item.latitud, lng: item.longitud },
+                  distance: 0,
+                });
               });
-            });
+            }
+
+            if (res.data.registros.length === 0) {
+              context.unidadUbicada = "Sin resultados";
+            }
           }
 
           if (res.data.status.toUpperCase() === "ERROR") {
           }
-          //
         });
     },
     obtenerEstadosYUnidades(lat, lng) {
       var context = this;
       const baseURI =
-        this.baseURL +
-        "menudigital/index.php/sucursal/sucursales_estados_todos";
+        this.$baseURL +
+        "/menudigital/index.php/sucursal/sucursales_estados_todos";
       this.$http
         .get(
           baseURI,
@@ -466,7 +521,7 @@ export default {
             params: {
               latitud: lat,
               longitud: lng,
-              id_marca: "1",
+              id_marca: this.$id_marca,
               token:
                 "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
             },
@@ -478,33 +533,16 @@ export default {
             context.unidadesSelect = res.data.unidades;
             context.estadosSelect = res.data.estados;
             context.unidadesSelect.map((item, index) => {
-                if (item.id_estado === "9") {
-                  console.log("-----");
-                 // context.unidadesXEstado.push(item);
-                  
-                }
-              });
-            /*res.data.registros.map((item, index) => {
-              this.datas[0].list.push(item.nombre_sucursal);
-              this.unidades.push({
-                id_sucursal: item.id_sucursal,
-                nombre: item.nombre_sucursal,
-                nombre_estado: item.nombre_estado,
-                position: { lat: item.latitud, lng: item.longitud },
-                distance: 0,
-              });
-            });*/
+              if (item.id_estado === "9") {
+                console.log("-----");
+                // context.unidadesXEstado.push(item);
+              }
+            });
           }
 
           if (res.data.status.toUpperCase() === "ERROR") {
           }
-          //
         });
-    },
-
-    gMapFunc(evnt) {
-      //this.jdata = { geo: { lat: evnt.lat(), lng: evnt.lng() } };
-      console.log(event);
     },
   },
 };
@@ -513,7 +551,8 @@ export default {
 <style>
 @font-face {
   font-family: Cocogoose-Pro-trial;
-  src: url("~@/assets/fonts/Cocogoose Pro-trial.ttf");
+  src: url("~@/assets/fonts/CocogoosePro-trial.ttf");
+  font-display: swap;
 }
 
 .primary_color_bg {
@@ -545,9 +584,8 @@ export default {
   margin: 0;
   padding: 0;
   left: 0;
-  background-image: url(../assets/img/fondo_home.jpg);
   background-size: 101% !important;
-  background-position: center;
+  background-position: center !important;
   background-repeat: no-repeat;
 }
 
@@ -661,16 +699,10 @@ a {
   opacity: 1; /* Firefox */
 }
 
-.md-icon.md-theme-default.md-icon-image svg {
-  /*display: none;*/
-}
-
 .pin_loc {
   width: 50px;
   height: 50px !important;
-  /*position: absolute;*/
   margin-left: -5px;
-  /*background-color: #f58220 !important;*/
   padding: 7px;
   border-radius: 100%;
   justify-content: center;
@@ -681,7 +713,6 @@ a {
   float: left;
   margin-right: auto;
   display: block;
-  /*margin-top: -10px;*/
   margin-left: -25px;
 }
 
@@ -737,11 +768,32 @@ a {
   padding-right: 0 !important;
   background-color: inherit !important;
 
-  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
-    0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000042;
   border-radius: 25px;
   opacity: 1;
+}
+
+.dialog_customToks > div {
+  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.dialog_customBF > div {
+  background: transparent
+    linear-gradient(
+      180deg,
+      var(--unnamed-color-00000000) 0%,
+      var(--unnamed-color-191919) 100%
+    )
+    0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px var(--unnamed-color-00000000);
+  background: transparent linear-gradient(180deg, #000000 0%, #191919 100%) 0%
+    0% no-repeat padding-box !important;
+}
+
+.dialog_customElFarolito > div {
+  background: transparent linear-gradient(180deg, #cf1a33 0%, #ad182d 100%) 0%
+    0% no-repeat padding-box;
 }
 
 .btnConfirm {
@@ -750,17 +802,15 @@ a {
   width: 30% !important;
   font-size: 150% !important;
   margin-bottom: 10px !important;
-  background: transparent linear-gradient(180deg, #f58220 0%, #db6500 100%) 0%
-    0% no-repeat padding-box !important;
   box-shadow: 0px 3px 6px #00000042 !important;
   border-radius: 25px !important;
 }
 
-.btnConfirmUnidad{
-    width: auto !important;
-    padding-left: 20px !important;
-    padding-right: 10px !important;
-  }
+.btnConfirmUnidad {
+  width: auto !important;
+  padding-left: 20px !important;
+  padding-right: 10px !important;
+}
 
 .btnCancel {
   background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
@@ -775,7 +825,6 @@ a {
 }
 
 .dialog_custom > div > div > button {
-  background-color: #f58220;
   color: #eee !important;
   border-radius: 6px;
   font-weight: bold;
@@ -785,9 +834,6 @@ a {
   justify-content: center !important;
 }
 
-.md-list {
-  background-color: rgb(58, 58, 58) !important;
-}
 .md-list-item-text {
   color: white;
 }
@@ -807,15 +853,21 @@ a {
   margin: 10px;
   padding-top: 3px;
   font-weight: normal;
-  font-family: AvenirNextLTPro-Regular;
+  font-family: FontMain;
 }
 
 .titulo_eslogan {
   position: fixed;
   bottom: 29% !important;
   color: #fff;
-  left: 50%;
   font-family: Cocogoose-Pro-trial !important;
+  width: 90%;
+  z-index: 1;
+  bottom: 10px;
+  margin-left: -40%;
+  display: block;
+  left: 45%;
+  font-size: 22px;
 }
 
 .logo_empresa {
@@ -831,13 +883,16 @@ a {
   width: 80%;
 }
 
-
-
 .item-list-estados > .md-active > .md-list-expand {
   background-color: #eee !important;
   height: auto !important;
   max-height: 35vh !important;
   overflow-y: auto;
+  background-color: inherit !important;
+}
+
+.item-list-estados > .md-active > .md-list-expand > ul {
+  background-color: inherit !important;
 }
 
 .inset-list > button > div {
@@ -852,8 +907,21 @@ a {
   margin-bottom: 30px;
 }
 
+.list-select-unidad > .md-list,
+.list-select-unidad > .md-list > div {
+  background-color: inherit !important;
+}
+
+.list-estados {
+  background-color: inherit !important;
+}
+
 .ic_elige_sucursal {
   color: #f58220 !important;
+}
+
+.dialog-actions-splash {
+  border-color: inherit !important;
 }
 
 @keyframes glowing {
@@ -885,11 +953,6 @@ a {
   }
 }
 
-/* 
-  ##Device = Most of the Smartphones Mobiles (Portrait)
-  ##Screen = B/w 320px to 479px
-*/
-
 @media (min-width: 400px) and (max-width: 480px) {
   .logo_empresa {
     margin-left: -150px !important;
@@ -918,14 +981,8 @@ a {
   width: 200px;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(120%);
-  /*box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.2);*/
   display: block;
   transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.logo_empresa:hover img {
-  /* box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.1);*/
 }
 
 .logo_empresa .glow-wrap {
@@ -957,7 +1014,7 @@ a {
   left: 50%;
   position: fixed;
   z-index: 1;
-  margin-left: -100px;
+  margin-left: -110px;
   bottom: 40%;
 }
 
@@ -965,14 +1022,8 @@ a {
   width: 200px;
   height: 280px;
   object-fit: contain;
-  filter: grayscale(100%) contrast(120%);
-  /*box-shadow: 0px 0px 25px 0 rgb(0, 0, 0);*/
   display: block;
   transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.photo:hover img {
-  /*box-shadow: 1px 1px 10px 0 rgba(0,0,0,.1);*/
 }
 
 .photo .glow-wrap {
@@ -996,10 +1047,11 @@ a {
   position: fixed;
   bottom: 0;
   margin-bottom: 6px;
-  width: 100%;
+  width: 96%;
   background-color: #202223;
   border-radius: 30px;
   z-index: 3;
+  left: 2%;
 }
 
 .btn_menu {
@@ -1062,7 +1114,6 @@ a {
 }
 
 .list_picker > div > .smooth-middle {
-  /*background-color: orange;*/
   border-radius: 30px;
   color: #fff !important;
 }
@@ -1070,7 +1121,7 @@ a {
 .title_dialog_inicio {
   text-align: center;
   color: #eee;
-  font-family: AvenirNextLTPro-Regular;
+  font-family: FontMain;
   margin-top: 25px;
   font-size: 1.5rem;
   font-weight: normal;
@@ -1078,15 +1129,10 @@ a {
 
 @media (min-width: 400px) and (max-width: 480px) {
   .txt_marca_seleccionada {
-    /*font-size: 21px;*/
     font-size: 100%;
   }
 
   .titulo_eslogan {
-    width: 380px;
-    margin-left: -190px;
-    z-index: 1;
-    bottom: 90px;
     font-weight: normal;
     font-size: 25px;
   }
@@ -1101,7 +1147,7 @@ a {
   }
 
   .photo img {
-    width: 240px !important;
+    width:250px !important;
     height: 250px;
   }
 
@@ -1115,7 +1161,11 @@ a {
 
   .txt_marca_seleccionada {
     font-size: 1.2rem;
-    margin-top: 13px !important;
+    margin-top: 9px !important;
+  }
+
+  .txt_marca_seleccionada_dialog{
+    margin-top: 18px !important;
   }
 
   .pin_loc_dialog {
@@ -1123,7 +1173,7 @@ a {
     height: 60px !important;
   }
 
-  .btnConfirmUnidad{
+  .btnConfirmUnidad {
     width: auto !important;
     padding-left: 20px !important;
     padding-right: 10px !important;
@@ -1140,17 +1190,10 @@ a {
     height: 43px !important;
   }
 
-  .btnLocal {
-    /*width: 200px;
-    margin-left: -100px !important;*/
-  }
-
   .titulo_eslogan {
-    width: 250px;
-    margin-left: -125px;
-    z-index: 1;
     bottom: 100px;
     font-weight: normal;
+    font-size: 18px;
   }
 
   .photo {
@@ -1166,25 +1209,20 @@ a {
     font-size: 1rem;
   }
 
-  .btnConfirmUnidad{
+  .btnConfirmUnidad {
     font-size: 15px !important;
     width: auto !important;
     padding-left: 20px !important;
     padding-right: 10px !important;
   }
 
-  .item-list-estados > div > div > span{
-  font-size: 13px;
-}
+  .item-list-estados > div > div > span {
+    font-size: 13px;
+  }
 }
 
 @media (min-width: 320px) and (max-width: 400px) {
 }
-
-/* 
-  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-  ##Screen = B/w 481px to 767px
-*/
 
 @media (min-width: 320px) and (max-width: 731px) {
   .splash {
@@ -1193,13 +1231,6 @@ a {
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-  .titulo_eslogan {
-    width: 250px;
-    margin-left: -125px;
-    z-index: 1;
-    bottom: 10px;
-  }
-
   .dialog_custom > div {
     width: 80% !important;
   }
@@ -1209,8 +1240,8 @@ a {
   }
 
   .photo img {
-    width: 250px !important;
-    height: 200px;
+    width: 240px !important;
+    height: 210px;
   }
 
   .pin_loc_dialog {
@@ -1220,10 +1251,10 @@ a {
 
   .txt_marca_seleccionada {
     font-size: 1.2rem;
-    margin-top: 13px;
+    margin-top: 11px;
   }
 
-  .btnConfirmUnidad{
+  .btnConfirmUnidad {
     width: auto !important;
     padding-left: 20px !important;
     padding-right: 10px !important;
@@ -1238,13 +1269,6 @@ a {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .titulo_eslogan {
-    width: 250px;
-    margin-left: -125px;
-    z-index: 1;
-    bottom: 10px;
-  }
-
   .photo img {
     width: 250px !important;
     height: 200px;
@@ -1260,24 +1284,16 @@ a {
 
   .txt_marca_seleccionada {
     font-size: 1.2rem;
-    margin-top: 13px;
+    margin-top: 11px;
   }
 
   .pin_loc_dialog {
     width: 60px;
     height: 60px !important;
   }
-  
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-  .titulo_eslogan {
-    width: 250px;
-    margin-left: -125px;
-    z-index: 1;
-    bottom: 10px;
-  }
-
   .photo img {
     width: 250px !important;
     height: 200px;
@@ -1289,7 +1305,7 @@ a {
 
   .txt_marca_seleccionada {
     font-size: 1.2rem;
-    margin-top: 13px;
+    margin-top: 11px;
   }
 
   .pin_loc_dialog {
@@ -1299,13 +1315,6 @@ a {
 }
 
 @media (min-width: 1281px) {
-  .titulo_eslogan {
-    width: 250px;
-    margin-left: -125px;
-    z-index: 1;
-    bottom: 10px;
-  }
-
   .photo img {
     width: 250px !important;
     height: 200px;
@@ -1321,7 +1330,7 @@ a {
 
   .txt_marca_seleccionada {
     font-size: 1.2rem;
-    margin-top: 13px;
+    margin-top: 11px;
   }
 
   .pin_loc_dialog {
@@ -1333,5 +1342,222 @@ a {
 .smooth-item-selected {
   background-color: #f58220 !important;
   border-radius: 30px;
+}
+
+/*Styles multimarca */
+.photoToks img {
+}
+
+@media (min-width: 320px) and (max-width: 399px) {
+  .photoBF {
+    bottom: inherit;
+    top: 120px;
+    left: 50%;
+    margin-left: -40% !important;
+    width: 80% !important;
+  }
+
+  .photoBF .logo_home_img {
+    /*width: 200px !important;*/
+    width: 100% !important;
+    /*height: auto !important;*/
+    height: 30vh !important;
+  }
+
+  .logo_sello {
+    width: 80% !important;
+    height: 20vh !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoElFarolito {
+    bottom: inherit;
+    top: 30vh;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoElFarolito .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 480px) {
+  .photoBF {
+    bottom: inherit;
+    top: 120px;
+    left: 50%;
+    margin-left: -40% !important;
+    width: 80% !important;
+  }
+
+  .photoBF .logo_home_img {
+    width: 90% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .logo_sello {
+    width: 80% !important;
+    height: 14vh !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoElFarolito {
+    bottom: inherit;
+    top: 30vh;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoElFarolito .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .photoBF {
+    bottom: inherit;
+    top: 120px;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoBF .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+
+  .logo_sello {
+    width: 80% !important;
+    height: 20vh !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoElFarolito {
+    bottom: inherit;
+    top: 30vh;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoElFarolito .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .photoBF {
+    bottom: inherit;
+    top: 120px;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoBF .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+
+  .logo_sello {
+    width: 80% !important;
+    height: 20vh !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoElFarolito {
+    bottom: inherit;
+    top: 30vh;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoElFarolito .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .photoBF {
+    bottom: inherit;
+    top: 120px;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoBF .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+
+  .logo_sello {
+    width: 80% !important;
+    height: 20vh !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoElFarolito {
+    bottom: inherit;
+    top: 30vh;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoElFarolito .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+}
+
+@media (min-width: 1281px) {
+  .photoBF {
+    bottom: inherit;
+    top: 120px;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoBF .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
+
+  .logo_sello {
+    width: 80% !important;
+    height: 20vh !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoElFarolito {
+    bottom: inherit;
+    top: 30vh;
+    left: 50%;
+    margin-left: -45% !important;
+    width: 90% !important;
+  }
+
+  .photoElFarolito .logo_home_img {
+    width: 100% !important;
+    height: 30vh !important;
+  }
 }
 </style>

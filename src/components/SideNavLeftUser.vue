@@ -6,7 +6,7 @@
       :class="{ openSideNavLefUser: clickMenu }"
       @click="onClickSide($event)"
     >
-      <div class="list md-scrollbar" @click="onClickSide2($event)">
+      <div class="list md-scrollbar" @click="onClickSide2($event)"  v-bind:style="styles.dataSideNavLeftUser.bgColor">
         <md-toolbar class="md-transparent toolbar_user" md-elevation="0">
           <!--<md-card class="md-primary card-info-user" md-theme="green-card">
             <md-card-header>
@@ -46,7 +46,7 @@
                     <g>
                       <g>
                         <g>
-                          <path class="primary_color_bg"
+                          <path v-bind:style="styles.fiillColorPrimary"
                             d="M448,236.6v-66c0-22.4-17.4-40.6-39.3-42.3l-61.3-107c-5.7-9.9-14.8-17-25.8-19.9c-10.9-2.9-22.3-1.4-32.1,4.3L79.6,128
 				H42.7C19.1,128,0,147.1,0,170.7v256c0,23.5,19.1,42.7,42.7,42.7h362.7c23.5,0,42.7-19.1,42.7-42.7v-66
 				c12.4-4.4,21.3-16.1,21.3-30v-64C469.3,252.8,460.4,241.1,448,236.6z M383.9,128h-93l69.7-40.6L383.9,128z M350.1,68.9L248.6,128
@@ -55,7 +55,7 @@
 				c11.8,0,21.3,9.6,21.3,21.3v64h-64c-35.3,0-64,28.7-64,64s28.7,64,64,64h64L426.7,426.7L426.7,426.7z M448,330.7
 				c0,5.9-4.8,10.7-10.7,10.7h-74.7c-23.5,0-42.7-19.1-42.7-42.7c0-23.5,19.1-42.7,42.7-42.7h74.7c5.9,0,10.7,4.8,10.7,10.7V330.7z"
                           />
-                          <path class="primary_color_bg"
+                          <path v-bind:style="styles.fiillColorPrimary"
                             d="M362.7,277.3c-11.8,0-21.3,9.6-21.3,21.3s9.6,21.3,21.3,21.3s21.3-9.6,21.3-21.3C384,286.9,374.4,277.3,362.7,277.3z"
                           />
                         </g>
@@ -78,14 +78,14 @@
             class="md-raised md-accent btnCloseSideRight btnCloseSideLeftUser"
             @click="close"
           >
-            <md-icon class="icon_close_side">keyboard_arrow_left</md-icon>
+            <md-icon class="icon_close_side" v-bind:style="styles.dataSideNavLeftUser.colorBtnCloseSide">keyboard_arrow_left</md-icon>
           </md-button>
           <!--</div>-->
         </div>
       </div>
     </div>
 
-  <FormaDePago @closeFormaPagos="closeFormaPagos" v-if="showFormaPagos"/>
+  <FormaDePago :jsonConfig="jsonConfig" @closeFormaPagos="closeFormaPagos" v-if="showFormaPagos"/>
     
   </div>
 </template>
@@ -94,8 +94,8 @@
 export default {
   name: "SideNavLeftUser",
   props: {
-    msg: String,
     showSideLeftUser: Boolean,
+    jsonConfig: Object
   },
   components:{
     //Configuracion: () => import("./Configuracion.vue"),
@@ -122,6 +122,7 @@ export default {
   },
   data() {
     return {
+      styles: this.jsonConfig,
       expandNews: false,
       expandSingle: false,
       clickMenu: this.showSideLeftUser,
@@ -194,7 +195,7 @@ export default {
 
 .md-icon.md-theme-default.md-icon-image svg {
   /*display: none;*/
-  fill: #F58220 !important ;
+  fill: #ffffff !important ;
 }
 
 .title-sublist > div {
@@ -295,7 +296,7 @@ $list-width: 320px;
 .btnCloseSideLeftUser {
   position: absolute !important;
   left: 240px !important;
-  top: 45%;
+  top: 60%;
 }
 
 .btnCloseSideRight {
@@ -326,7 +327,7 @@ $list-width: 320px;
 
 .icon_close_side {
   color: #F58220 !important;
-  font-size: 48px !important;
+  font-size: 40px !important;
 }
 
 .icon_side {
@@ -335,6 +336,10 @@ $list-width: 320px;
   margin-right: 10px !important;
   width: 25px;
   height: 25px;
+}
+
+.openSideNavLefUser > div > div > div > ul {
+  background-color: inherit !important;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -386,8 +391,8 @@ $list-width: 320px;
 
   .openSideNavLefUser > div,
   .sidenav > div {
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px !important;
+    border-top-right-radius: 20px !important;
   }
 
   .md-icon-image svg {
@@ -462,8 +467,8 @@ $list-width: 320px;
   .sidenav > div {
     height: 100vh;
     background-color: #282828;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   .btnMenuSide {
@@ -508,8 +513,8 @@ $list-width: 320px;
   .sidenav > div {
     height: 100vh;
     background-color: #282828;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px !important;
+    border-top-right-radius: 20px;
   }
 }
 
@@ -534,8 +539,8 @@ $list-width: 320px;
   .sidenav > div {
     height: 100vh;
     background-color: #282828;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
   }
 }
 </style>

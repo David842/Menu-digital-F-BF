@@ -1,3 +1,4 @@
+
 module.exports = {
-  publicPath: '/toks'
+  publicPath: '/elfarolito'
 }

@@ -1,0 +1,168 @@
+{
+  "baseURL": "https://www.menugrg.com.mx:7443/",
+  "bgDegradedColorPrimary": [
+    {
+      "background": "transparent linear-gradient(180deg, #E9BF7D 0%, #BF8326 100%) 0% 0% no-repeat padding-box !important"
+    }
+  ],
+  "bgDegradedSecondColor": [
+    {
+      "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important"
+    }
+  ],
+  "fiillColorPrimary": [
+    {
+      "fill": "#ebb373 !important"
+    }
+  ],
+  "colorPrimary": [
+    {
+      "color": "#ebb373 !important"
+    }
+  ],
+  "styleBtnHome": [
+    {
+      "background": "transparent linear-gradient(180deg, #E9BF7D 0%, #BF8326 100%) 0% 0% no-repeat padding-box !important",
+      "color": "#1b1818 !important",
+      "font-weight": "bold"
+    }
+  ],
+  "dataHome": {
+    "bgHome": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important",
+        "width": "100%",
+        "height": "100%",
+        "display": "block",
+        "z-index": "5",
+        "position": "fixed",
+        "top": "0"
+      }
+    ],
+    "fondo_home": [
+      {
+        "background": "url('https://menugrg.com.mx:7443/recs_marcas/fondo_bf_min.jpg')"
+      }
+    ],
+    "titleCarrouselExp": "¿No sabes que cerveza tomar?",
+    "subtitleCarrouselExp": "Te invitamos a conocerlas",
+    "src_logo_home": "https://menugrg.com.mx:7443/recs_marcas/logo_beer.png",
+    "src_sello": "https://menugrg.com.mx:7443/recs_marcas/Sello-BFF.png",
+    "class_logo_home": "photoBF",
+    "class_sello_home": "selloBF",
+    "styleLogo_home": [{}],
+    "styleTitleExperiencias": [
+      {
+        "font-family": "GilliganShutter"
+      }
+    ],
+    "title_eslogan": null,
+    "btnConfirmar": [
+      {
+        "background": "transparent linear-gradient(180deg, #E9BF7D 0%, #BF8326 100%) 0% 0% no-repeat padding-box !important",
+        "color": "#FFF !important"
+      }
+    ],
+    "btnCancel": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important",
+        "color": "#FFF !important"
+      }
+    ],
+    "btnLocal": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "btnUbicacion": [
+      {
+        "background": "transparent linear-gradient(180deg, var(--unnamed-color-191919) 0%, var(--unnamed-color-00000000) 100%) 0% 0% no-repeat padding-box !important",
+        "box-shadow": "0px 1px 0px #5B5B5B",
+        "border-radius": "24px",
+        "opacity": 1
+      }
+    ],
+    "colorIcon": [
+      {
+        "color": "#E9BF7D !important"
+      }
+    ],
+    "classDialogCustom": "dialog_customBF"
+  },
+  "dataSideNavLeftUser": {
+    "bgColor": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "classItemSide": "list-number-bf",
+    "colorBtnCloseSide": [
+      {
+        "color": "#fff !important"
+      }
+    ]
+  },
+  "dataCategorias": {
+    "styleNombreView": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box"
+      }
+    ],
+    "iconBtnTopLeft": [
+      {
+        "color": "#E9BF7D !important"
+      }
+    ],
+    "btnTopLeft": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "iconControls": [{}],
+    "styles_content_experiencias": [
+      {
+        "background": "#262628 0% 0% no-repeat padding-box"
+      }
+    ],
+    "style_menu_home_bottom": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box !important"
+      }
+    ],
+    "colorBtnCloseSide": [
+      {
+        "color": "#E9BF7D !important"
+      }
+    ],
+    "style_border_primaryColor": [
+      {
+        "border": "1px solid #E9BF7D"
+      }
+    ],
+    "classControls_categorias": "carrousel-3d-categoriasBF"
+  },
+  "dataDetalles": {
+    "colorTitleProd": [
+      {
+        "color": "#E9BF7D !important"
+      }
+    ],
+    "style_select_medida": {
+      "border": "1px solid #f58220"
+    },
+    "style_content_add_prod": [
+      {
+        "background": "transparent linear-gradient(180deg, #191919 0%, #000000 100%) 0% 0% no-repeat padding-box",
+        "box-shadow": "0px 3px 6px #00000042"
+      }
+    ]
+  },
+  "linkFacebook": "https://www.facebook.com/beerfactorymx/",
+  "linkTwitter": "https://twitter.com/beerfactorymx",
+  "linkInstagram": "https://www.instagram.com/beerfactorymx/",
+  "correos": ["contacto@bff.com.mx"],
+  "telefonos": [
+    { "nombre": "D.F y área metropolitana", "numero": "55 2122 5727" },
+    { "nombre": "Interior de la república", "numero": "80 0713 9500" }
+  ]
+}

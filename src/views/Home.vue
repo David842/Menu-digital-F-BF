@@ -454,7 +454,7 @@ export default {
   },
   mounted() {
     var lista = "";
-
+    var d = new Date();
     var listaCompraEKS = "listaCompraEKS" + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(";");
@@ -488,13 +488,6 @@ export default {
       localStorage.setItem("id_unidad_eks", id_unidad_consultar);
     }
 
-    var OSName = "Desconocido";
-    if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
-    if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
-    if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
-    if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-    if (navigator.appVersion.indexOf("Android") != -1) OSName = "Android";
-
     if (localStorage.getItem("vsta")) {
       primeraVisita = 0;
     } else {
@@ -512,10 +505,9 @@ export default {
           params: {
             id_marca: this.$id_marca,
             id_sucursal: id_unidad_consultar,
-            tipo_dispositivo: OSName,
-            primera_visita: primeraVisita,
-            fecha: "",
-            hora: "",
+            agent: navigator.userAgent,
+            hora_solicitud: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+            fecha_solicitud: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
             token:
               "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
           },

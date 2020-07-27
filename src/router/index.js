@@ -38,7 +38,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/elfarolito',
+  base: '/toks',
   routes
 })
 

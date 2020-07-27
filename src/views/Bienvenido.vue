@@ -67,9 +67,9 @@ export default {
 <style>
 @font-face {
   font-family: FontMain;
-  src: url(../assets/fonts/Geogtq-Md.otf);
-  /*src: url(../assets/fonts/avenir-next-lt-pro.otf);*/
-  /*src: url(../assets/fonts/BebasNeue-Regular.otf);*/
+  /*src: url(../assets/fonts/Geogtq-Md.otf);*/
+   src: url(../assets/fonts/avenir-next-lt-pro.otf);
+  /*src: url(../assets/fonts/BebasNeue-Regular.otf);
   font-display:swap;
 }
 body {

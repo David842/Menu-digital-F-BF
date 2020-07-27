@@ -54,12 +54,12 @@
     ],
     "fondo_home": [
       {
-        "background": "url('https://pruebasgerard.com/toks/recs/PORTADA_1_2560x1600.jpg')",
+        "background": "url('https://menugrg.com.mx:7443/recs_marcas/PORTADA_1_2560x1600.jpg')",
         "background-size": "cover !important"
       }
     ],
     "titleCarrouselExp": "Tortillas hechas a mano",
-    "src_logo_home": "https://pruebasgerard.com/toks/recs/Logotipo_elfarolito.png",
+    "src_logo_home": "https://menugrg.com.mx:7443/recs_marcas/Logotipo_elfarolito.png",
     "src_sello": null,
     "class_logo_home": "photoElFarolito",
     "class_sello_home": "selloBF",

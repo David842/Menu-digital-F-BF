@@ -706,6 +706,7 @@ export default {
     },
   },
   mounted() {
+    var d = new Date();
     this.nombre_categoria = this.$route.query.nombre_categoria;
     this.img_categoria = this.$route.query.img_categoria;
     var lista = "";
@@ -732,7 +733,6 @@ export default {
 
       this.nPedidos = this.listaParaOrdenar.length;
     }
-
     const baseURI =
       this.$baseURL + "/menudigital/index.php/articulo/articulos_categoria";
     this.$http
@@ -743,6 +743,9 @@ export default {
             sucursal: localStorage.getItem("id_unidad_eks"),
             id_marca: this.$id_marca,
             categoria: this.$route.query.categoria,
+            hora_solicitud: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+            fecha_solicitud: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
+            agent: navigator.userAgent,
             token:
               "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
           },
@@ -751,7 +754,7 @@ export default {
       )
       .then((res) => {
         if (res.data.status === "OK") {
-          console.log(res.data);
+          console.log(navigator.appVersion);
           this.descripcion_categoria = res.data.categoria.descripcion;
           this.categorias = res.data.categoria;
 
@@ -1558,7 +1561,7 @@ body {
 .content_experiencias_detalles {
   display: block;
   position: absolute;
-  right: 0;
+  right: 12px;
 }
 
 .icon_experiencia {
@@ -1573,6 +1576,7 @@ body {
 
 .icon_experiencia > img {
   width: auto;
+      height: 52px; 
 }
 
 .txt_decimal {

@@ -31,12 +31,12 @@
   "dataHome": {
     "fondo_home": [
       {
-        "background": "url('https://pruebasgerard.com/toks/recs/fondo_home.jpg')"
+        "background": "url('https://menugrg.com.mx:7443/recs_marcas/fondo_home.jpg')"
       }
     ],
     "titleCarrouselExp": "Esta es la experiencia Toks",
     "subtitleCarrouselExp": null,
-    "src_logo_home": "https://pruebasgerard.com/toks/recs/logo_toks.png",
+    "src_logo_home": "https://menugrg.com.mx:7443/recs_marcas/logo_toks.png",
     "src_sello": null,
     "class_logo_home": "photoToks",
     "styleLogo_home": [{}],

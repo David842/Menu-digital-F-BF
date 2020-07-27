@@ -456,6 +456,7 @@ export default {
     },
     obtenerEstadoByBD(lat, lng) {
       var context = this;
+      var d = new Date();
       const baseURI =
         this.$baseURL + "/menudigital/index.php/sucursal/sucursales_estados";
       this.$http
@@ -466,6 +467,9 @@ export default {
               latitud: lat,
               longitud: lng,
               id_marca: this.$id_marca,
+              agent: navigator.userAgent,
+              hora_solicitud: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+              fecha_solicitud: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
               token:
                 "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
             },
@@ -510,6 +514,7 @@ export default {
         });
     },
     obtenerEstadosYUnidades(lat, lng) {
+      var d = new Date();
       var context = this;
       const baseURI =
         this.$baseURL +
@@ -522,6 +527,8 @@ export default {
               latitud: lat,
               longitud: lng,
               id_marca: this.$id_marca,
+              hora_solicitud: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+              fecha_solicitud: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
               token:
                 "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
             },

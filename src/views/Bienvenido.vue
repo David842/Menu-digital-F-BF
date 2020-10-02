@@ -48,13 +48,13 @@ export default {
       this.$router.push({path:"/home/" + this.$id_marca});
     },
     openSideLeft() {
-      this.showSideLeftUser = true;
+      //this.showSideLeftUser = true;
       //this.showSideRigthContactos = false;
       this.$emit("update", true);
     },
     openSideRightUser(){
       
-      this.showSideRigthContactos = true;
+      //this.showSideRigthContactos = true;
       this.$emit("updateNavRight", true);
     }
   },

@@ -38,14 +38,14 @@
               :to="{
                 path: '/detalles/' + $route.params.id,
                 query: {
-                  categoria: slide.id,
+                  categoria: slide.id_categoria,
                   id_unidad: id_unidad,
-                  nombre_categoria: slide.nombre,
+                  nombre_categoria: slide.categoria,
                   img_categoria: slide.ubicacion,
                 },
               }"
             >
-              <section v-if="slide.id == -1" class="skeleton">
+              <section v-if="slide.id_categoria == -1" class="skeleton">
                 <div class="skeleton__header">
                   <div class="skeleton__circle"></div>
                   <div class="skeleton__img"></div>
@@ -54,21 +54,21 @@
               </section>
 
               <div
-                v-if="slide.id !== -1"
+                v-if="slide.id_categoria !== -1"
                 class="item_contain_img"
                 v-bind:style="{
                   'background-image':
                     'linear-gradient(rgba(0, 0, 0, 0.37), rgba(0, 0, 0, 0.63)),url(\'' +
-                    slide.ubicacion +
+                    $baseURL + slide.ubicacion +
                     '\')',
                 }"
               >
                 <h1 v-if="false" class="title_item_carrousel">
-                  {{ slide.nombre }}
+                  {{ slide.categoria }}
                 </h1>
                 <img
-                  v-if="slide.id !== -1"
-                  :src="slide.imagen_titulo_categoria"
+                  v-if="slide.id_categoria !== -1"
+                  :src="$baseURL + slide.imagen_titulo_categoria"
                   class="img_title_item_carrousel"
                   alt=""
                 />
@@ -329,7 +329,6 @@ export default {
         this.experiencias[index - 1].visible = false;
         this.experiencias[index - 1].opacity = ".4";
       } else {
-        console.log(this.experiencias);
         if (this.experiencias.length > 0) {
           this.experiencias[this.experiencias.length - 1].visible = false;
           this.experiencias[this.experiencias.length - 1].opacity = ".4";
@@ -416,8 +415,6 @@ export default {
       }
     },
     consultaExperiencias() {
-      //alert(this.$route.params.id);
-
       const baseURI =
         this.$baseURL + "/menudigital/index.php/experiencia/experiencia_marca";
       this.$http
@@ -441,20 +438,67 @@ export default {
                 id: item.id_experiencia,
                 nombre: item.nombre_experiencia,
                 descripcion: item.descripcion_experiencia,
-                ubicacion: item.ubicacion,
+                ubicacion: this.$baseURL + item.ubicacion,
                 visible: false,
                 opacity: ".5",
               };
               this.experiencias.push(obj);
             });
             this.$refs.carouselExperiencia.goSlide(0);
+            sessionStorage.setItem(
+              "experiencias_menu_" + this.$id_marca,
+              JSON.stringify(this.experiencias)
+            );
+          }
+        });
+    },
+    consultaApiCategorias(id_unidad_consultar) {
+      var d = new Date();
+      const baseURI =
+        //this.$baseURL + "/menudigital/index.php/categoria/categorias_sucursal";
+        this.$baseURL + "/menudigital/index.php/articulo/articulos_sucursal";
+      this.$http
+        .get(
+          baseURI,
+          {
+            params: {
+              marca: this.$id_marca,
+              sucursal: id_unidad_consultar,
+              agent: navigator.userAgent,
+              hora_solicitud:
+                d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+              fecha_solicitud:
+                d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
+              token:
+                "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
+            },
+          },
+          { "Access-Control-Allow-Origin": "*" }
+        )
+        .then((res) => {
+          if (res.data.status === "OK") {
+            this.categorias = [];
+            res.data.categoria.map((item) => {
+              const obj = {
+                id_categoria: item.id_categoria,
+                categoria: item.categoria,
+                descripcion: item.descripcion,
+                ubicacion: item.ubicacion,
+                imagen_titulo_categoria:
+                   item.imagen_titulo_categoria,
+                visible: false,
+              };
+              this.categorias.push(obj);
+            });
+            this.$refs.mycarousel.goSlide(0);
+            sessionStorage.setItem("categorias_menu_" + this.$id_marca,JSON.stringify(res.data.categoria));
           }
         });
     },
   },
   mounted() {
     var lista = "";
-    var d = new Date();
+    
     var listaCompraEKS = "listaCompraEKS" + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(";");
@@ -488,52 +532,29 @@ export default {
       localStorage.setItem("id_unidad_eks", id_unidad_consultar);
     }
 
-    if (localStorage.getItem("vsta")) {
+    /*if (localStorage.getItem("vsta")) {
       primeraVisita = 0;
     } else {
       //alert("null");
       // localStorage.setItem('vsta',"1");
-    }
+    }*/
 
     //alert(OSName);
-    const baseURI =
-      this.$baseURL + "/menudigital/index.php/categoria/categorias_sucursal";
-    this.$http
-      .get(
-        baseURI,
-        {
-          params: {
-            id_marca: this.$id_marca,
-            id_sucursal: id_unidad_consultar,
-            agent: navigator.userAgent,
-            hora_solicitud: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
-            fecha_solicitud: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
-            token:
-              "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
-          },
-        },
-        { "Access-Control-Allow-Origin": "*" }
-      )
-      .then((res) => {
-        console.log(res.data.registros);
-        if (res.data.status === "OK") {
-          this.categorias = [];
-          res.data.registros.map((item) => {
-            const obj = {
-              id: item.id,
-              nombre: item.nombre,
-              descripcion: item.descripcion,
-              ubicacion: item.ubicacion,
-              imagen_titulo_categoria: item.imagen_titulo_categoria,
-              visible: false,
-            };
-            this.categorias.push(obj);
-          });
-          this.$refs.mycarousel.goSlide(0);
-        }
-      });
 
-    this.consultaExperiencias();
+    if(sessionStorage.getItem("categorias_menu_" + this.$id_marca)){
+      this.categorias = JSON.parse(sessionStorage.getItem("categorias_menu_" + this.$id_marca));
+    }else{
+      this.consultaApiCategorias(id_unidad_consultar);
+    }
+
+    if (sessionStorage.getItem("experiencias_menu_" + this.$id_marca)) {
+      this.experiencias = JSON.parse(
+        sessionStorage.getItem("experiencias_menu_" + this.$id_marca)
+      );
+      this.$refs.carouselExperiencia.goSlide(0);
+    } else {
+      this.consultaExperiencias();
+    }
   },
 
   created() {

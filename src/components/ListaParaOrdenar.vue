@@ -39,7 +39,7 @@
             <md-card class="card_producto card_producto_list">
               <md-card-media>
                 <img
-                  v-bind:src="(typeof(producto.ubicacion_articulo) === 'undefined' || producto.ubicacion_articulo == null) ? 'https://pruebasgerard.com/toks/recs/image-not-found.png' : producto.ubicacion_articulo " 
+                  v-bind:src="(typeof(producto.ubicacion_articulo) === 'undefined' || producto.ubicacion_articulo == null) ? 'https://pruebasgerard.com/toks/recs/image-not-found.png' : $baseURL + producto.ubicacion_articulo " 
                   alt="Producto"
                   class="img_producto_lista"
                 />

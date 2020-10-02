@@ -33,7 +33,7 @@
     <div
       class="banner_categoria"
       v-bind:style="{
-        'background-image': 'url(\'' + img_categoria + '\')',
+        'background-image': 'url(\'' + $baseURL + img_categoria + '\')',
       }"
     >
       <h3 class="desc_categoria" v-if="descripcion_categoria">
@@ -66,7 +66,8 @@
                 @click="openDialog(articulo)"
                 v-bind:src="
                   typeof articulo.ubicacion_articulo_min === 'undefined' ||
-                  articulo.ubicacion_articulo_min == null || articulo.ubicacion_articulo_min === ''
+                  articulo.ubicacion_articulo_min == null ||
+                  articulo.ubicacion_articulo_min === ''
                     ? articulo.ubicacion_articulo
                     : articulo.ubicacion_articulo_min
                 "
@@ -104,9 +105,10 @@
               @click="openDialog(articulo)"
               v-bind:src="
                 typeof articulo.ubicacion_articulo_min === 'undefined' ||
-                  articulo.ubicacion_articulo_min == null || articulo.ubicacion_articulo_min === ''
-                    ? articulo.ubicacion_articulo
-                    : articulo.ubicacion_articulo_min
+                articulo.ubicacion_articulo_min == null ||
+                articulo.ubicacion_articulo_min === ''
+                  ? articulo.ubicacion_articulo
+                  : articulo.ubicacion_articulo_min
               "
               alt="Producto"
               class="img_producto"
@@ -231,7 +233,7 @@
         <div
           class="imagen_prod_detalle"
           v-bind:style="{
-            'background-image': 'url(' + '\'' + imagenAMostrar + '\')',
+            'background-image': 'url(' + '\'' + $baseURL + imagenAMostrar + '\')',
           }"
         >
           <p
@@ -255,7 +257,7 @@
             v-for="(experiencia, j) in articuloSelected.experiencias"
             class="icon_experiencia"
           >
-            <img :src="experiencia.ubicacion" alt="experiencia" />
+            <img :src="$baseURL + experiencia.ubicacion" alt="experiencia" />
             <md-tooltip md-direction="left">{{
               experiencia.nombre
             }}</md-tooltip>
@@ -340,7 +342,7 @@
       v-bind:class="jsonConfig.dataHome.classDialogCustom"
     >
       <div
-        class="content_add_prod"
+        class="content_add_prod content_confirm_add"
         v-bind:style="jsonConfig.dataDetalles.style_content_add_prod"
       >
         <h3
@@ -618,13 +620,12 @@ export default {
       );
     },
     loadImgArticulo(articulo) {
-      
       if (articulo.ubicacion_articulo === "") {
         //alert("sin imagen");
       }
     },
     loadImgError(articulo) {
-     // alert();
+      // alert();
       articulo.ubicacion_articulo_min = require("../assets/img/image-not-found.png");
       articulo.ubicacion_articulo = require("../assets/img/image-not-found.png");
       //articulo.ubicacion_articulo = "https://pruebasgerard.com/menudigital/categorias/Volcanes.1593472406.jpg";
@@ -665,7 +666,6 @@ export default {
       this.nPedidos = this.listaParaOrdenar.length;
     },
     openDialog(articulo) {
-      console.log("hola");
       console.log(articulo);
       if (articulo.medidas.length === 0) {
       } else {
@@ -679,10 +679,8 @@ export default {
         articulo.detalle_imagen === ""
       ) {
         console.log(articulo.ubicacion_articulo);
-        if (
-          articulo.ubicacion_articulo === null
-        ) {
-          this.imagenAMostrar = require("../assets/img/image-not-found.png");;
+        if (articulo.ubicacion_articulo === null) {
+          this.imagenAMostrar = require("../assets/img/image-not-found.png");
         } else {
           this.imagenAMostrar = articulo.ubicacion_articulo;
         }
@@ -704,9 +702,57 @@ export default {
       }
       //this.$router.push("/home/" + this.$route.params.id);
     },
+    apiProductosXCategoria() {
+      var d = new Date();
+      const baseURI =
+        this.$baseURL + "/menudigital/index.php/articulo/articulos_categoria";
+      this.$http
+        .get(
+          baseURI,
+          {
+            params: {
+              sucursal: localStorage.getItem("id_unidad_eks"),
+              id_marca: this.$id_marca,
+              categoria: this.$route.query.categoria,
+              hora_solicitud:
+                d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+              fecha_solicitud:
+                d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
+              agent: navigator.userAgent,
+              token:
+                "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
+            },
+          },
+          { "Access-Control-Allow-Origin": "*" }
+        )
+        .then((res) => {
+          if (res.data.status === "OK") {
+            console.log(navigator.appVersion);
+            this.descripcion_categoria = res.data.categoria.descripcion;
+            this.categorias = res.data.categoria;
+
+            this.sending = false;
+          }
+
+          if (res.data.status.toUpperCase() === "ERROR") {
+            this.alertMessage = res.data.respuesta;
+            this.showSnackbar = true;
+            this.sending = false;
+          }
+        });
+    },
+    obtenerCategoriaLocal(id_categoria){
+      JSON.parse(sessionStorage.getItem("categorias_menu_" + this.$id_marca)).map((item, index) =>{
+        if(item.id_categoria == id_categoria){
+          console.log(item);
+          this.categorias = item;
+          this.descripcion_categoria = item.descripcion;
+        }
+      });
+    }
   },
   mounted() {
-    var d = new Date();
+    
     this.nombre_categoria = this.$route.query.nombre_categoria;
     this.img_categoria = this.$route.query.img_categoria;
     var lista = "";
@@ -733,50 +779,12 @@ export default {
 
       this.nPedidos = this.listaParaOrdenar.length;
     }
-    const baseURI =
-      this.$baseURL + "/menudigital/index.php/articulo/articulos_categoria";
-    this.$http
-      .get(
-        baseURI,
-        {
-          params: {
-            sucursal: localStorage.getItem("id_unidad_eks"),
-            id_marca: this.$id_marca,
-            categoria: this.$route.query.categoria,
-            hora_solicitud: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
-            fecha_solicitud: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
-            agent: navigator.userAgent,
-            token:
-              "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
-          },
-        },
-        { "Access-Control-Allow-Origin": "*" }
-      )
-      .then((res) => {
-        if (res.data.status === "OK") {
-          console.log(navigator.appVersion);
-          this.descripcion_categoria = res.data.categoria.descripcion;
-          this.categorias = res.data.categoria;
 
-          res.data.categoria.subcategoria.map((item, index) => {
-            console.log(item.articulos[index]);
-            //item.articulos[index].articulos.map((itemSub) => {
-            //console.log(item.articulos);
-            console.log("entro");
-            //});
-          });
-          //Object.assign(item, {key3: "value3"});
-
-          this.sending = false;
-        }
-
-        if (res.data.status.toUpperCase() === "ERROR") {
-          this.alertMessage = res.data.respuesta;
-          this.showSnackbar = true;
-          this.sending = false;
-          //this.$router.push("/");
-        }
-      });
+    if(sessionStorage.getItem("categorias_menu_" + this.$id_marca)){
+      this.obtenerCategoriaLocal(this.$route.query.categoria);
+    }else{
+      this.apiProductosXCategoria();
+    }
   },
 
   created() {
@@ -1498,6 +1506,11 @@ body {
   opacity: 1;
 }
 
+.content_confirm_add{
+  background: transparent linear-gradient(180deg, #2f2f30 0%, #262628 100%) 0%
+    0% no-repeat padding-box;
+}
+
 .content_add_prod > div {
   width: fit-content;
   margin-left: auto !important;
@@ -1576,7 +1589,7 @@ body {
 
 .icon_experiencia > img {
   width: auto;
-      height: 52px; 
+  height: 52px;
 }
 
 .txt_decimal {
@@ -1778,6 +1791,10 @@ body {
   max-width: inherit !important;
   display: contents;
   margin-left: 10px !important;
+}
+
+.md-ripple{
+      -webkit-mask-image: initial;
 }
 
 ul#menu {

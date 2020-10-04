@@ -19,15 +19,6 @@ import axios from 'axios'
 import Carousel3d from 'vue-carousel-3d'
 import json from './assets/config/toks.json'
 
-import {Swiper as SwiperClass, Pagination, Navigation, Mousewheel, Autoplay} from 'swiper/swiper.esm'
-import getAwesomeSwiper from 'vue-awesome-swiper/dist/exporter'
-
-SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay])
-Vue.use(getAwesomeSwiper(SwiperClass))
-const {Swiper, SwiperSlide} = getAwesomeSwiper(SwiperClass)
-
-
-
 
 Vue.use(Carousel3d);
 

@@ -59,8 +59,7 @@
                 v-bind:style="{
                   'background-image':
                     'linear-gradient(rgba(0, 0, 0, 0.37), rgba(0, 0, 0, 0.63)),url(\'' +
-                    $baseURL +
-                    slide.ubicacion +
+                    $baseURL + slide.ubicacion +
                     '\')',
                 }"
               >
@@ -230,8 +229,6 @@
       :listaParaOrdenar="listaParaOrdenar"
       :jsonConfig="jsonConfig"
     />
-
-    <Comunicado :comunicados="comunicados" :verComunicado="verComunicado" />
   </div>
 </template>
 
@@ -264,8 +261,6 @@ export default {
       nPedidos: 0,
       id_unidad: 0,
       jsonConfig: this.$json,
-      verComunicado: false,
-      comunicados: [],
     };
   },
   components: {
@@ -273,7 +268,6 @@ export default {
     Slide,
     Controls,
     SideNav: () => import("@/components/SideNav.vue"),
-    Comunicado: () => import("@/components/Comunicado.vue"),
     ListaParaOrdenar: () => import("@/components/ListaParaOrdenar.vue"),
   },
   methods: {
@@ -490,53 +484,21 @@ export default {
                 categoria: item.categoria,
                 descripcion: item.descripcion,
                 ubicacion: item.ubicacion,
-                imagen_titulo_categoria: item.imagen_titulo_categoria,
+                imagen_titulo_categoria:
+                   item.imagen_titulo_categoria,
                 visible: false,
               };
               this.categorias.push(obj);
             });
             this.$refs.mycarousel.goSlide(0);
-            sessionStorage.setItem(
-              "categorias_menu_" + this.$id_marca,
-              JSON.stringify(res.data.categoria)
-            );
-          }
-        });
-    },
-    consultaComunicados() {
-      const baseURI =
-        this.$baseURL +
-        "/menudigital/index.php/comunicado/Comunicados_marca_sucursal";
-      this.$http
-        .get(
-          baseURI,
-          {
-            params: {
-              id_marca: this.$id_marca,
-              id_unidad: localStorage.getItem("id_unidad_eks"),
-              token:
-                "e9840b0b4143fc82ef6d8bdb36c96a8dd1cd501be8f3c6f0f3887a80bd70e3fd7b4c9205d524cb1a5502a6325e38e09ab4b8de58d0f0c39f6019aaba682ec8b7",
-            },
-          },
-          { "Access-Control-Allow-Origin": "*" }
-        )
-        .then((res) => {
-          if (res.data.status === "OK") {
-            console.log(res.data.registros);
-            if (res.data.registros.length > 0) {
-              this.comunicados = res.data.registros;
-              this.verComunicado = true;
-            }
-          }
-
-          if (res.data.status.toUpperCase() === "ERROR") {
+            sessionStorage.setItem("categorias_menu_" + this.$id_marca,JSON.stringify(res.data.categoria));
           }
         });
     },
   },
   mounted() {
     var lista = "";
-
+    
     var listaCompraEKS = "listaCompraEKS" + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(";");
@@ -558,16 +520,16 @@ export default {
       this.listaParaOrdenar = arr;
       this.nPedidos = this.listaParaOrdenar.length;
     }
-    //alert(this.$route.params.id);
-    //
+
     var id_unidad_consultar = "";
     var primeraVisita = 1;
     if (typeof this.$route.query.unidad === "undefined") {
       //alert("id de cache");
       id_unidad_consultar = this.id_unidad;
     } else {
+      // alert("id de url");
       id_unidad_consultar = this.$route.query.unidad;
-      //localStorage.setItem("id_unidad_eks", id_unidad_consultar);
+      localStorage.setItem("id_unidad_eks", id_unidad_consultar);
     }
 
     /*if (localStorage.getItem("vsta")) {
@@ -579,31 +541,13 @@ export default {
 
     //alert(OSName);
 
-    if (
-      sessionStorage.getItem("categorias_menu_" + this.$id_marca)
-    ) {
-      this.categorias = JSON.parse(
-        sessionStorage.getItem("categorias_menu_" + this.$id_marca)
-      );
-    } else {
-      localStorage.setItem("id_unidad_eks", this.$route.params.id);
-      //alert();
-      this.consultaApiCategorias(id_unidad_consultar);
-      
-    }
-
-    if (sessionStorage.getItem("comunicado_visto")) {
-      
+    if(sessionStorage.getItem("categorias_menu_" + this.$id_marca)){
+      this.categorias = JSON.parse(sessionStorage.getItem("categorias_menu_" + this.$id_marca));
     }else{
-      this.consultaComunicados();
-      sessionStorage.setItem("comunicado_visto","si");
+      this.consultaApiCategorias(id_unidad_consultar);
     }
 
-    
-
-    if (
-      sessionStorage.getItem("experiencias_menu_" + this.$id_marca) 
-    ) {
+    if (sessionStorage.getItem("experiencias_menu_" + this.$id_marca)) {
       this.experiencias = JSON.parse(
         sessionStorage.getItem("experiencias_menu_" + this.$id_marca)
       );

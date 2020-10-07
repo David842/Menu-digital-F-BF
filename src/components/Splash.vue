@@ -332,7 +332,6 @@ export default {
     };
   },
   mounted() {
-    /*omitir para marca toks*/
     this.showDialogUnidades();
   },
   methods: {
@@ -376,9 +375,6 @@ export default {
     },
     confirmar() {
       if (this.idUnidadSelected !== null) {
-        if(localStorage.getItem("id_unidad_eks") != this.idUnidadSelected){
-          sessionStorage.removeItem("categorias_menu_" + this.$id_marca);
-        }
         localStorage.setItem("id_unidad_eks", this.idUnidadSelected);
         this.showDialog = false;
         this.unidadSelected.nombre = this.unidadSelectedDialog;
@@ -490,12 +486,7 @@ export default {
               context.loading = false;
               context.unidadSelected.nombre =
                 res.data.registros[0].nombre_sucursal;
-                //alert(res.data.registros[0].id_sucursal);
-      if(localStorage.getItem("id_unidad_eks") == res.data.registros[0].id_sucursal){
-          
-        }else{
-          sessionStorage.removeItem("categorias_menu_" + this.$id_marca);
-        }
+
               localStorage.setItem(
                 "id_unidad_eks",
                 res.data.registros[0].id_sucursal

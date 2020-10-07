@@ -21,6 +21,14 @@
 
 export default {
   name: "Bienvenido",
+  watch: {
+        $route: {
+            immediate: true,
+            handler(to, from) {
+                document.title = to.meta.title || 'Menú Toks';
+            }
+        },
+    },
   components: {
     Splash: () => import("@/components/Splash.vue"),
     SideNavLeftUser : () => import("@/components/SideNavLeftUser.vue"),
@@ -37,10 +45,7 @@ export default {
   methods: {
     goMenu() {
       //this.splashVisible = false;
-      
       this.$router.push({path:"/home/" + this.$id_marca});
-      /*Caso toks*/
-      //this.$router.push({path:"/home/" + this.$route.params.id});
     },
     openSideLeft() {
       //this.showSideLeftUser = true;
